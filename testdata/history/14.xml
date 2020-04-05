@@ -1,0 +1,14 @@
+<!-- HGV_meta_EpiDoc/HGV220/219944.xml -->
+               <history>
+                  <origin>
+                     <origPlace>Theben</origPlace>
+                     <origDate notBefore="0701" notAfter="0750" precision="low"/>
+                  </origin>
+                  <provenance type="located">
+                     <p>
+                        <placeName type="ancient"
+                                   ref="http://pleiades.stoa.org/places/991398 http://www.trismegistos.org/place/2983 http://www.trismegistos.org/place/1281">Theben</placeName>
+                        <placeName type="ancient" subtype="region" key="Aegyptus">Ägypten</placeName>
+                     </p>
+                  </provenance>
+               </history>

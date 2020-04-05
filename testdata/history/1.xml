@@ -1,0 +1,15 @@
+<!-- HGV_meta_EpiDoc/HGV113/112437.xml -->
+               <history>
+                  <origin>
+                     <origPlace>Paimis (Oxyrhynchites)</origPlace>
+                     <origDate when="-0003-01-30">30. Jan. 3 v.Chr.</origDate>
+                  </origin>
+                  <provenance type="located">
+                     <p>
+                        <placeName type="ancient"
+                                   ref="http://pleiades.stoa.org/places/736986 http://www.trismegistos.org/place/2869">Paimis</placeName>
+                        <placeName type="ancient" subtype="nome">Oxyrhynchites</placeName>
+                        <placeName type="ancient" subtype="region">Ägypten</placeName>
+                     </p>
+                  </provenance>
+               </history>

@@ -1,0 +1,3 @@
+beautifulsoup4==4.9.0
+black==19.10b0  # Code formatter
+lxml==4.5.0

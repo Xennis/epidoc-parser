@@ -1,0 +1,10 @@
+language: python
+python:
+  - "3.7"
+install:
+  - pip install --quiet --requirement requirements.txt
+script:
+  - black --line-length 132 *.py
+  - python -m unittest discover -p '*_test.py'
+branches:
+  only: [master]

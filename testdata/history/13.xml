@@ -1,0 +1,14 @@
+<!-- HGV_meta_EpiDoc/HGV141/140175.xml -->
+               <history>
+                  <origin>
+                     <origPlace>Oxyrhynchos</origPlace>
+                     <origDate notBefore="0161-09" notAfter="0162-01">
+                        <precision match="../@notBefore" degree="0.5"/>ca. Sept. 161 - Jan. 162</origDate>
+                  </origin>
+                  <provenance type="located">
+                     <p>
+                        <placeName type="ancient"
+                                   ref="http://pleiades.stoa.org/places/736982 http://www.trismegistos.org/place/2722 http://www.trismegistos.org/place/1524">Oxyrhynchos</placeName>
+                     </p>
+                  </provenance>
+               </history>

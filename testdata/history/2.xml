@@ -1,0 +1,27 @@
+<!-- DCLP/100/99548.xml:
+            <availability>
+               <p>© Digital Corpus of Literary Papyri. This work is licensed under a <ref type="license" target="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</ref>.</p>
+            </availability>
+-->
+               <history>
+                  <origin>
+                     <origPlace>Found: Middle Egypt (Egypt); written: Middle Egypt (Egypt)</origPlace>
+                     <origDate notBefore="0881" notAfter="0909">881 - 909</origDate>
+                  </origin>
+                  <provenance type="found">
+                     <p>
+                        <placeName type="ancient"
+                                   subtype="region"
+                                   ref="https://www.trismegistos.org/place/2800">Middle Egypt</placeName>
+                        <placeName type="ancient" subtype="region">Egypt</placeName>
+                     </p>
+                  </provenance>
+                  <provenance type="composed">
+                     <p>
+                        <placeName type="ancient"
+                                   subtype="region"
+                                   ref="https://www.trismegistos.org/place/2800">Middle Egypt</placeName>
+                        <placeName type="ancient" subtype="region">Egypt</placeName>
+                     </p>
+                  </provenance>
+               </history>
