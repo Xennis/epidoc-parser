@@ -1,0 +1,18 @@
+<!-- HGV_meta_EpiDoc/HGV9/8693.xml -->
+               <history>
+                  <origin>
+                     <origPlace>unbekannt (Oberägypten)</origPlace>
+                     <origDate notBefore="0142" notAfter="0143">142 - 143</origDate>
+                  </origin>
+                  <provenance type="located">
+                     <p>
+                        <placeName type="ancient" subtype="region">Oberägypten</placeName>
+                     </p>
+                  </provenance>
+                  <provenance type="found">
+                     <p>
+                        <placeName>unbekannt</placeName>
+                     </p>
+                  </provenance>
+
+               </history>

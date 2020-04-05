@@ -1,0 +1,22 @@
+<!-- HGV_meta_EpiDoc/HGV141/140158.xml -->
+               <history>
+                  <origin>
+                     <origPlace>Oxyrhynchos</origPlace>
+                     <origDate xml:id="dateAlternativeX"
+                               notBefore="0357"
+                               notAfter="0358"
+                               cert="low">
+                        <precision match="../@notBefore" degree="0.5"/>ca. 357 - 358 (?)</origDate>
+                     <origDate xml:id="dateAlternativeY"
+                               notBefore="0372"
+                               notAfter="0373"
+                               cert="low">
+                        <precision match="../@notBefore" degree="0.5"/>ca. 372 - 373 (?)</origDate>
+                  </origin>
+                  <provenance type="located">
+                     <p>
+                        <placeName type="ancient"
+                                   ref="http://pleiades.stoa.org/places/736982 http://www.trismegistos.org/place/2722 http://www.trismegistos.org/place/1524">Oxyrhynchos</placeName>
+                     </p>
+                  </provenance>
+               </history>

@@ -1,0 +1,10 @@
+<!-- APD/apd305.xml -->
+		<history>
+			<origin>
+				<origPlace ref="http://www.trismegistos.org/place/332">unknown (al-Fayyūm)</origPlace>
+				<origDate notBefore="1132" notAfter="1132">2nd decade of muḥarram 527 AH</origDate>
+				</origin>
+			<provenance type="located">
+				<placeName ref="http://www.trismegistos.org/place/332">unknown (al-Fayyūm)</placeName>
+				</provenance>
+		</history>

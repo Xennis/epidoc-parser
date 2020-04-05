@@ -1,0 +1,10 @@
+<!-- APD/apd23.xml -->
+		<history>
+			<origin>
+				<origPlace ref="http://www.trismegistos.org/place/237">Išqawh</origPlace>
+				<origDate notBefore="0709" notAfter="0710">ṣafar 91 AH</origDate>
+				</origin>
+			<provenance type="located">
+				<placeName ref="http://www.trismegistos.org/place/237">Išqawh</placeName>
+				</provenance>
+		</history>
