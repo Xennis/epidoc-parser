@@ -3,12 +3,12 @@ import unittest
 
 from bs4 import BeautifulSoup
 
-from history import ParseHistory
+from header import History, ProfileDesc
 
 TESTDATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "testdata")
 
 
-class TestDates(unittest.TestCase):
+class TestHistory(unittest.TestCase):
     def test_all(self):
         tests = [
             (
@@ -197,10 +197,122 @@ class TestDates(unittest.TestCase):
                 },
             ),
         ]
-        for (filename, want_dates, want_places) in tests:
-            with open(os.path.join(TESTDATA_DIR, "history", filename)) as f:
-                soup = BeautifulSoup(f.read(), features="lxml")
-            actual_dates = ParseHistory.dates(soup.history)
-            self.assertEqual(want_dates, actual_dates, msg=f"{filename} dates")
-            actual_places = ParseHistory.places(soup.history)
+        for (filename, want_origin_dates, want_places) in tests:
+            with open(os.path.join(TESTDATA_DIR, "header-history", filename)) as f:
+                elem = BeautifulSoup(f.read(), features="lxml").history
+            actual_dates = History.origin_dates(elem)
+            self.assertEqual(want_origin_dates, actual_dates, msg=f"{filename} dates")
+            actual_places = History.places(elem)
             self.assertEqual(want_places, actual_places, msg=f"{filename} places")
+
+
+class TestProfileDesc(unittest.TestCase):
+    def test_all(self):
+        tests = [
+            (
+                "1.xml",
+                [
+                    {"text": "prose"},
+                    {"text": "gospel"},
+                    {"text": "literature", "type": "culture"},
+                    {"text": "christian", "type": "religion"},
+                    {"text": "New Testament, Johannes evang.; gospel Joh. 1.25-28, 33-38, 42-44", "type": "overview"},
+                ],
+                {"en": "English", "grc": "Greek"},
+            ),
+            (
+                "2.xml",
+                [
+                    {"text": "prose"},
+                    {"text": "novel"},
+                    {"text": "literature", "type": "culture"},
+                    {"text": "classical", "type": "religion"},
+                    {"text": "Panionis (novel)", "type": "overview"},
+                ],
+                {"en": "English", "grc": "Greek"},
+            ),
+            (
+                "3.xml",
+                [{"text": "doc"}],
+                {
+                    "de": "Deutsch",
+                    "el": "Griechisch",
+                    "en": "Englisch",
+                    "es": "Spanisch",
+                    "fr": "Französisch",
+                    "it": "Italienisch",
+                    "la": "Latein",
+                },
+            ),
+            (
+                "4.xml",
+                [{"text": None}],
+                {
+                    "de": "Deutsch",
+                    "el": "Griechisch",
+                    "en": "Englisch",
+                    "es": "Spanisch",
+                    "fr": "Französisch",
+                    "it": "Italienisch",
+                    "la": "Latein",
+                },
+            ),
+            (
+                "5.xml",
+                [
+                    {"text": "Auszug aus Akten des Besitzarchivs; Briefe (amtlich)"},
+                    {"text": "Stratege"},
+                    {"text": "Präfekt; Liturgie"},
+                    {"text": "Verschuldung gegenüber dem Staat"},
+                    {"text": "Konfiskation"},
+                    {"text": "Verkauf aus Staatsbesitz"},
+                    {"text": "Versteigerung"},
+                ],
+                {
+                    "de": "Deutsch",
+                    "el": "Griechisch",
+                    "en": "Englisch",
+                    "es": "Spanisch",
+                    "fr": "Französisch",
+                    "it": "Italienisch",
+                    "la": "Latein",
+                },
+            ),
+            (
+                "6.xml",
+                [
+                    {"n": "1", "text": "Zahlung"},
+                    {"n": "2", "text": "Auftrag"},
+                    {"n": "3", "text": "Anagnostes"},
+                    {"n": "4", "text": "Notar"},
+                    {"n": "5", "text": "Kollektarios"},
+                    {"n": "6", "text": "Geld"},
+                ],
+                {
+                    "de": "Deutsch",
+                    "el": "Griechisch",
+                    "en": "Englisch",
+                    "es": "Spanisch",
+                    "fr": "Französisch",
+                    "it": "Italienisch",
+                    "la": "Latein",
+                },
+            ),
+            ("7.xml", [], {"egy-egyd": "Demotic", "en": "English", "grc": "Greek"},),
+            (
+                "8.xml",
+                [
+                    {"text": "medicine"},
+                    {"text": "science", "type": "culture"},
+                    {"text": "two medical prescriptions", "type": "overview"},
+                ],
+                {},
+            ),
+        ]
+        for (filename, want_terms, want_langs) in tests:
+            with open(os.path.join(TESTDATA_DIR, "header-profile-desc", filename)) as f:
+                elem = BeautifulSoup(f.read(), features="lxml").profiledesc
+            actual_terms = ProfileDesc.keyword_terms(elem)
+            self.assertEqual(want_terms, actual_terms, msg=f"{filename} terms")
+            actual_langs = ProfileDesc.lang_usage(elem)
+            self.assertEqual(want_langs, actual_langs, msg=f"{filename} langs")

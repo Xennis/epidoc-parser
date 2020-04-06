@@ -1,0 +1,20 @@
+<!-- DCLP/113/112359.xml
+            <availability>
+               <p>© Digital Corpus of Literary Papyri. This work is licensed under a <ref type="license" target="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</ref>.</p>
+            </availability>
+-->
+      <profileDesc>
+         <textClass>
+            <keywords>
+               <term>prose</term>
+               <term>gospel</term>
+               <term type="culture">literature</term>
+               <term type="religion">christian</term>
+               <term type="overview">New Testament, Johannes evang.; gospel Joh. 1.25-28, 33-38, 42-44</term>
+            </keywords>
+         </textClass>
+         <langUsage>
+            <language ident="en">English</language>
+            <language ident="grc">Greek</language>
+         </langUsage>
+      </profileDesc>

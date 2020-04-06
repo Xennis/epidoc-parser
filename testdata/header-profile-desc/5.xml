@@ -1,0 +1,24 @@
+<!-- HGV_meta_EpiDoc/HGV45/44100.xml -->
+      <profileDesc>
+         <langUsage>
+            <language ident="fr">Französisch</language>
+            <language ident="en">Englisch</language>
+            <language ident="de">Deutsch</language>
+            <language ident="it">Italienisch</language>
+            <language ident="es">Spanisch</language>
+            <language ident="la">Latein</language>
+            <language ident="el">Griechisch</language>
+         </langUsage>
+         <textClass>
+            <keywords scheme="hgv">
+               <term>Auszug aus Akten des Besitzarchivs; Briefe (amtlich)</term>
+               <term>Stratege</term>
+               <term>Präfekt; Liturgie</term>
+               <term>Verschuldung gegenüber dem Staat</term>
+               <term>Konfiskation</term>
+               <term>Verkauf aus Staatsbesitz</term>
+               <term>Versteigerung</term>
+            </keywords>
+         </textClass>
+      </profileDesc>
+
