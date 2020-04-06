@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 
-from history import ParseHistory
+from header import History, ProfileDesc
 from normalize import normalize
 
 
@@ -11,9 +11,11 @@ class EpiDocHeader:
     material = None
     dates = []
     places = []
+    terms = []
+    languages = {}
 
     @classmethod
-    def create(cls, title, idno, material=None, dates=None, places=None):
+    def create(cls, title, idno, material=None, dates=None, places=None, terms=None, languages=None):
         h = cls()
         h.title = title
         h.idno = idno
@@ -22,6 +24,10 @@ class EpiDocHeader:
             h.dates = dates
         if places is not None:
             h.places = places
+        if terms is not None:
+            h.terms = terms
+        if languages is not None:
+            h.languages = languages
         return h
 
     def __eq__(self, other):
@@ -33,10 +39,12 @@ class EpiDocHeader:
             and self.material == other.material
             and self.dates == other.dates
             and self.places == other.places
+            and self.terms == other.terms
+            and self.languages == other.languages
         )
 
     def __repr__(self):
-        return f"title={self.title},idno={self.idno},material={self.material},date={self.dates},places={self.places}"
+        return f"title={self.title},idno={self.idno},material={self.material},date={self.dates},places={self.places},terms={self.terms},languages={self.languages}"
 
 
 class EpiDoc:
@@ -67,7 +75,8 @@ def loads(s):
 
     header = EpiDocHeader()
 
-    filedesc = soup.teiheader.filedesc
+    teiheader = soup.teiheader
+    filedesc = teiheader.filedesc
     header.title = filedesc.titlestmt.title.getText()
     idnos = {}
     for idno in filedesc.publicationstmt.find_all("idno"):
@@ -80,8 +89,12 @@ def loads(s):
     if msdesc:
         header.material = normalize(msdesc.physdesc.objectdesc.support.material.getText())
         history = msdesc.history
-        header.dates = ParseHistory.dates(history)
-        header.places = ParseHistory.places(history)
+        header.dates = History.origin_dates(history)
+        header.places = History.places(history)
+
+    profile_desc = teiheader.profiledesc
+    header.languages = ProfileDesc.lang_usage(profile_desc)
+    header.terms = ProfileDesc.keyword_terms(profile_desc)
 
     doc = EpiDoc()
     doc.header = header

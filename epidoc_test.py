@@ -21,6 +21,8 @@ class TestLoad(unittest.TestCase):
                             "hgv": "114844",
                             "tm": "114844",
                         },
+                        terms=[],
+                        languages={"en": "English", "la": "Latin"},
                     )
                 ),
             ),
@@ -30,6 +32,8 @@ class TestLoad(unittest.TestCase):
                     header=EpiDocHeader.create(
                         title="p.coles.16",
                         idno={"ddb-hybrid": "p.coles;;16", "filename": "p.coles.16", "hgv": "697551", "tm": "697551",},
+                        terms=[],
+                        languages={"en": "English", "grc": "Greek"},
                     )
                 ),
             ),
@@ -46,6 +50,12 @@ class TestLoad(unittest.TestCase):
                             "found": [{"text": "Egypt", "type": "ancient", "subtype": "region",}],
                             "composed": [{"text": "Egypt", "type": "ancient", "subtype": "region",}],
                         },
+                        terms=[
+                            {"text": "medicine"},
+                            {"type": "culture", "text": "science"},
+                            {"type": "overview", "text": "two medical prescriptions"},
+                        ],
+                        languages={},
                     )
                 ),
             ),
@@ -76,6 +86,15 @@ class TestLoad(unittest.TestCase):
                                 {"text": "Naqlun", "type": "ancient", "ref": ["https://www.trismegistos.org/place/1418"],},
                             ],
                         },
+                        terms=[
+                            {"text": "bible"},
+                            {"text": "prose"},
+                            {"text": "letter"},
+                            {"type": "culture", "text": "literature"},
+                            {"type": "religion", "text": "christian"},
+                            {"type": "overview", "text": "New Testament: Paulus apost.; Coloss. 2.8-19"},
+                        ],
+                        languages={"en": "English", "cop": "Coptic"},
                     )
                 ),
             ),
@@ -105,6 +124,16 @@ class TestLoad(unittest.TestCase):
                                 {"text": "Ägypten", "type": "ancient", "subtype": "region",},
                             ],
                         },
+                        terms=[{"text": "Erklärung (Steuer)"}],
+                        languages={
+                            "fr": "Französisch",
+                            "en": "Englisch",
+                            "de": "Deutsch",
+                            "it": "Italienisch",
+                            "es": "Spanisch",
+                            "la": "Latein",
+                            "el": "Griechisch",
+                        },
                     )
                 ),
             ),
@@ -133,6 +162,22 @@ class TestLoad(unittest.TestCase):
                                 {"text": "Oasis Magna", "type": "ancient", "subtype": "region",},
                             ],
                         },
+                        terms=[
+                            {"text": "Anweisung"},
+                            {"text": "Zahlung"},
+                            {"text": "Militär"},
+                            {"text": "Fleisch"},
+                            {"text": "Getreide"},
+                        ],
+                        languages={
+                            "fr": "Französisch",
+                            "en": "Englisch",
+                            "de": "Deutsch",
+                            "it": "Italienisch",
+                            "es": "Spanisch",
+                            "la": "Latein",
+                            "el": "Griechisch",
+                        },
                     )
                 ),
             ),
@@ -140,5 +185,8 @@ class TestLoad(unittest.TestCase):
 
         for (filename, want) in tests:
             with open(os.path.join(TESTDATA_DIR, "full", filename)) as f:
-                actual = load(f)
+                try:
+                    actual = load(f)
+                except Exception as e:
+                    self.fail(f"{filename} has error {e.__class__.__name__}: {e}")
             self.assertEqual(want, actual, msg=filename)

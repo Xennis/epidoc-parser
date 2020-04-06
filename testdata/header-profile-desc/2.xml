@@ -1,0 +1,20 @@
+<!-- DCLP/113/112366.xml
+            <availability>
+               <p>© Digital Corpus of Literary Papyri. This work is licensed under a <ref type="license" target="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</ref>.</p>
+            </availability>
+-->
+      <profileDesc>
+         <textClass>
+            <keywords>
+               <term>prose</term>
+               <term>novel</term>
+               <term type="culture">literature</term>
+               <term type="religion">classical</term>
+               <term type="overview">Panionis (novel)</term>
+            </keywords>
+         </textClass>
+         <langUsage>
+            <language ident="en">English</language>
+            <language ident="grc">Greek</language>
+         </langUsage>
+      </profileDesc>
