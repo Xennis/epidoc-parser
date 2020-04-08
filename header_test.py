@@ -14,6 +14,7 @@ class TestHistory(unittest.TestCase):
             (
                 "1.xml",
                 [{"text": "30. Jan. 3 v.Chr.", "when": "-0003-01-30",}],
+                {"text": "Paimis (Oxyrhynchites)",},
                 {
                     "located": [
                         {
@@ -24,12 +25,12 @@ class TestHistory(unittest.TestCase):
                         {"subtype": "nome", "text": "Oxyrhynchites", "type": "ancient",},
                         {"subtype": "region", "text": "Ägypten", "type": "ancient",},
                     ],
-                    "text": "Paimis (Oxyrhynchites)",
                 },
             ),
             (
                 "2.xml",
                 [{"notafter": "0909", "notbefore": "0881", "text": "881 - 909",}],
+                {"text": "Found: Middle Egypt (Egypt); written: Middle Egypt (Egypt)",},
                 {
                     "composed": [
                         {
@@ -49,25 +50,25 @@ class TestHistory(unittest.TestCase):
                         },
                         {"subtype": "region", "text": "Egypt", "type": "ancient",},
                     ],
-                    "text": "Found: Middle Egypt (Egypt); written: Middle Egypt (Egypt)",
                 },
             ),
             (
                 "3.xml",
                 [{"notafter": "0225", "notbefore": "0101", "precision": "low", "text": "II - Anfang III",}],
+                {"text": "unbekannt (Hermopolites ?)",},
                 {
                     "found": [{"text": "unbekannt"}],
                     "located": [
                         {"cert": "low", "subtype": "nome", "text": "Hermopolites", "type": "ancient",},
                         {"subtype": "region", "text": "Ägypten", "type": "ancient",},
                     ],
-                    "text": "unbekannt (Hermopolites ?)",
                 },
             ),
             (
                 "4.xml",
                 # TODO: Parse certainty
                 [{"text": "9. Okt. 141 (Monat und Tag unsicher)", "when": "0141-10-09",}],
+                {"text": "Soknopaiu Nesos (Arsinoites)",},
                 {
                     "located": [
                         {
@@ -78,54 +79,50 @@ class TestHistory(unittest.TestCase):
                         {"subtype": "nome", "text": "Arsinoites", "type": "ancient",},
                         {"subtype": "region", "text": "Ägypten", "type": "ancient",},
                     ],
-                    "text": "Soknopaiu Nesos (Arsinoites)",
                 },
             ),
             (
                 "5.xml",
                 [{"notafter": "0143", "notbefore": "0142", "text": "142 - 143",}],
-                {
-                    "found": [{"text": "unbekannt"}],
-                    "located": [{"subtype": "region", "text": "Oberägypten", "type": "ancient",}],
-                    "text": "unbekannt (Oberägypten)",
-                },
+                {"text": "unbekannt (Oberägypten)",},
+                {"found": [{"text": "unbekannt"}], "located": [{"subtype": "region", "text": "Oberägypten", "type": "ancient",}],},
             ),
-            ("6.xml", [{"notafter": "0400", "notbefore": "0001", "precision": "low", "text": "I - IV",}], {"text": "unbekannt"},),
+            (
+                "6.xml",
+                [{"notafter": "0400", "notbefore": "0001", "precision": "low", "text": "I - IV",}],
+                {"text": "unbekannt"},
+                {},
+            ),
             (
                 "7.xml",
                 [{"notafter": "0710", "notbefore": "0709", "text": "ṣafar 91 AH",}],
-                {
-                    "located": [{"ref": ["http://www.trismegistos.org/place/237"], "text": "Išqawh",}],
-                    "ref": "http://www.trismegistos.org/place/237",
-                    "text": "Išqawh",
-                },
+                {"ref": "http://www.trismegistos.org/place/237", "text": "Išqawh",},
+                {"located": [{"ref": ["http://www.trismegistos.org/place/237"], "text": "Išqawh",}],},
             ),
             (
                 "8.xml",
                 [{"notafter": "1132", "notbefore": "1132", "text": "2nd decade of muḥarram 527 AH",}],
-                {
-                    "located": [{"ref": ["http://www.trismegistos.org/place/332"], "text": "unknown (al-Fayyūm)",}],
-                    "ref": "http://www.trismegistos.org/place/332",
-                    "text": "unknown (al-Fayyūm)",
-                },
+                {"ref": "http://www.trismegistos.org/place/332", "text": "unknown (al-Fayyūm)",},
+                {"located": [{"ref": ["http://www.trismegistos.org/place/332"], "text": "unknown (al-Fayyūm)",}],},
             ),
             (
                 "9.xml",
                 [{"cert": "low", "precision": "medium", "text": "ca. 340 (?)", "when": "0340",}],
+                {"text": "Hermopolites",},
                 {
                     "located": [
                         {"subtype": "nome", "text": "Hermopolites", "type": "ancient",},
                         {"subtype": "region", "text": "Ägypten", "type": "ancient",},
                     ],
-                    "text": "Hermopolites",
                 },
             ),
             (
                 "10.xml",
                 [{"cert": "low", "notafter": "-0001", "notbefore": "-0200", "precision": "low", "text": "II - I v.Chr. (?)",}],
                 {"text": "unbekannt"},
+                {},
             ),
-            ("11.xml", [{"text": "unbekannt"}], {"text": "unbekannt"},),
+            ("11.xml", [{"text": "unbekannt"}], {"text": "unbekannt"}, {}),
             (
                 "12.xml",
                 [
@@ -144,6 +141,7 @@ class TestHistory(unittest.TestCase):
                         "xml:id": "datealternativey",
                     },
                 ],
+                {"text": "Oxyrhynchos",},
                 {
                     "located": [
                         {
@@ -156,12 +154,12 @@ class TestHistory(unittest.TestCase):
                             "type": "ancient",
                         }
                     ],
-                    "text": "Oxyrhynchos",
                 },
             ),
             (
                 "13.xml",
                 [{"notafter": "0162-01", "notbefore": "0161-09", "text": "ca. Sept. 161 - Jan. 162",}],
+                {"text": "Oxyrhynchos",},
                 {
                     "located": [
                         {
@@ -174,12 +172,12 @@ class TestHistory(unittest.TestCase):
                             "type": "ancient",
                         }
                     ],
-                    "text": "Oxyrhynchos",
                 },
             ),
             (
                 "14.xml",
                 [{"notafter": "0750", "notbefore": "0701", "precision": "low", "text": None,}],
+                {"text": "Theben",},
                 {
                     "located": [
                         {
@@ -193,17 +191,18 @@ class TestHistory(unittest.TestCase):
                         },
                         {"key": "aegyptus", "subtype": "region", "text": "Ägypten", "type": "ancient",},
                     ],
-                    "text": "Theben",
                 },
             ),
         ]
-        for (filename, want_origin_dates, want_places) in tests:
+        for (filename, want_origin_dates, want_origin_place, want_provenances) in tests:
             with open(os.path.join(TESTDATA_DIR, "header-history", filename)) as f:
                 elem = BeautifulSoup(f.read(), features="lxml").history
-            actual_dates = History.origin_dates(elem)
-            self.assertEqual(want_origin_dates, actual_dates, msg=f"{filename} dates")
-            actual_places = History.places(elem)
-            self.assertEqual(want_places, actual_places, msg=f"{filename} places")
+            actual_origin_dates = History.origin_dates(elem)
+            self.assertEqual(want_origin_dates, actual_origin_dates, msg=f"{filename} origin dates")
+            actual_origin_place = History.origin_place(elem)
+            self.assertEqual(want_origin_place, actual_origin_place, msg=f"{filename} origin place")
+            actual_provenances = History.provenances(elem)
+            self.assertEqual(want_provenances, actual_provenances, msg=f"{filename} provenances")
 
 
 class TestProfileDesc(unittest.TestCase):

@@ -9,21 +9,24 @@ class EpiDoc:
     title = None
     idno = {}
     material = None
-    dates = []
-    places = []
+    origin_dates = []
+    origin_place = []
+    provenances = {}
     terms = []
     languages = {}
 
     @classmethod
-    def create(cls, title, idno, material=None, dates=None, places=None, terms=None, languages=None):
+    def create(cls, title, idno, material=None, origin_dates=None, origin_place=None, provenances=None, terms=None, languages=None):
         h = cls()
         h.title = title
         h.idno = idno
         h.material = material
-        if dates is not None:
-            h.dates = dates
-        if places is not None:
-            h.places = places
+        if origin_dates is not None:
+            h.origin_dates = origin_dates
+        if origin_place is not None:
+            h.origin_place = origin_place
+        if provenances is not None:
+            h.provenances = provenances
         if terms is not None:
             h.terms = terms
         if languages is not None:
@@ -37,8 +40,9 @@ class EpiDoc:
             self.title == other.title
             and self.idno == other.idno
             and self.material == other.material
-            and self.dates == other.dates
-            and self.places == other.places
+            and self.origin_dates == other.origin_dates
+            and self.origin_place == other.origin_place
+            and self.provenances == other.provenances
             and self.terms == other.terms
             and self.languages == other.languages
         )
@@ -70,8 +74,9 @@ def loads(s):
     if msdesc:
         doc.material = normalize(msdesc.physdesc.objectdesc.support.material.getText())
         history = msdesc.history
-        doc.dates = History.origin_dates(history)
-        doc.places = History.places(history)
+        doc.origin_dates = History.origin_dates(history)
+        doc.origin_place = History.origin_place(history)
+        doc.provenances = History.provenances(history)
 
     profile_desc = teiheader.profiledesc
     doc.languages = ProfileDesc.lang_usage(profile_desc)
