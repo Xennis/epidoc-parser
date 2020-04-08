@@ -6,8 +6,7 @@ python:
 install:
   - pip install --quiet --requirement requirements.txt
 script:
-  - make format-check
-  - make unittest
+  - make check
   - make publish
 branches:
   only: [master]
