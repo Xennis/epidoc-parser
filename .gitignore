@@ -3,3 +3,8 @@
 
 # Python
 *.pyc
+
+# Local build files
+build/
+dist/
+*.egg-info/

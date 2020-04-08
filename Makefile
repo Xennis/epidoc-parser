@@ -8,3 +8,6 @@ format-check:
 
 unittest:
 	python -m unittest discover
+
+publish:
+	python setup.py sdist bdist_wheel
