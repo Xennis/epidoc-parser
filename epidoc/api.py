@@ -11,7 +11,7 @@ class EpiDoc:
     idno = {}
     material = None
     origin_dates = []
-    origin_place = []
+    origin_place = {}
     provenances = {}
     terms = []
     languages = {}
@@ -73,20 +73,28 @@ def loads(s):
     for idno in filedesc.publicationstmt.find_all("idno"):
         typ = _normalize(idno.attrs.get("type"))
         value = _normalize(idno.getText())
+        if not value:
+            continue
         idnos[typ] = value
     doc.idno = idnos
 
     msdesc = filedesc.sourcedesc.msdesc
     if msdesc:
-        doc.material = _normalize(msdesc.physdesc.objectdesc.support.material.getText())
+        physdesc = msdesc.physdesc
+        if physdesc:
+            support = physdesc.objectdesc.support
+            if hasattr(support, "material"):
+                doc.material = _normalize(_normalized_get_text(support.material))
         history = msdesc.history
-        doc.origin_dates = _History.origin_dates(history)
-        doc.origin_place = _History.origin_place(history)
-        doc.provenances = _History.provenances(history)
+        if history:
+            doc.origin_dates = _History.origin_dates(history)
+            doc.origin_place = _History.origin_place(history)
+            doc.provenances = _History.provenances(history)
 
     profile_desc = teiheader.profiledesc
-    doc.languages = _ProfileDesc.lang_usage(profile_desc)
-    doc.terms = _ProfileDesc.keyword_terms(profile_desc)
+    if profile_desc:
+        doc.languages = _ProfileDesc.lang_usage(profile_desc)
+        doc.terms = _ProfileDesc.keyword_terms(profile_desc)
 
     body = soup.body
     commentary = body.find("div", type="commentary", subtype="general")

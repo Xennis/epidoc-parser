@@ -10,6 +10,20 @@ class TestLoad(unittest.TestCase):
     def test_all(self):
         tests = [
             (
+                os.path.join("apd", "apd59t.xml"),
+                EpiDoc.create(title="P.Heid.Arab. I p. 6-7", idno={"filename": "pap(23new)", "tm": "106496"},),
+            ),
+            (
+                os.path.join("apis", "yale.apis.0000540000.xml"),
+                EpiDoc.create(
+                    title="Receipt, Roman CE ii (ca. 162) [BPG]",
+                    idno={"apisid": "yale.apis.0000540000", "controlno": "(cty)54", "hgv": "20671", "tm": "20671"},
+                    origin_dates=[{"notafter": "0199", "notbefore": "0100", "text": "Roman CE ii (ca. 162) [BPG]"}],
+                    terms=[{"text": "Receipt"}, {"text": "Papyri"}],
+                    languages={"en": "English", "grc": "Greek"},
+                ),
+            ),
+            (
                 os.path.join("ddb", "chla.3.198.xml"),
                 EpiDoc.create(
                     title="chla.3.198",

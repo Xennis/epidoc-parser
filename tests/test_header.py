@@ -211,6 +211,20 @@ class TestHistory(unittest.TestCase):
                     ]
                 },
             ),
+            (
+                "16.xml",
+                [{"notafter": "0800", "notbefore": "0601", "precision": "low", "text": "VII - VIII"}],
+                {"text": "Arsinoites oder Herakleopolites"},
+                {
+                    "located": [
+                        {"n": "1", "subtype": "nome", "text": "Arsinoites", "type": "ancient"},
+                        {"n": "2", "subtype": "region", "text": "Ägypten", "type": "ancient"},
+                        {"n": "1", "subtype": "nome", "text": "Herakleopolites", "type": "ancient"},
+                        {"n": "2", "subtype": "region", "text": "Ägypten", "type": "ancient"},
+                    ]
+                },
+            ),
+            ("17.xml", [{"notafter": "0199", "notbefore": "0100", "text": "Roman CE ii (ca. 162) [BPG]"}], {}, {},),
         ]
         for (filename, want_origin_dates, want_origin_place, want_provenances) in tests:
             with open(os.path.join(TESTDATA_DIR, "header-history", filename)) as f:

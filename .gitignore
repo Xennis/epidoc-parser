@@ -8,3 +8,6 @@
 build/
 dist/
 *.egg-info/
+
+# Local tests
+idp.data/

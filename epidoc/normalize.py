@@ -5,6 +5,8 @@ def _normalize(v):
 
 
 def _normalized_get_text(raw):
+    if not raw:
+        return None
     parsed = raw.getText().strip()
     return parsed if parsed else None
 
