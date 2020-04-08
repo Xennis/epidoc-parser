@@ -21,6 +21,7 @@ class TestLoad(unittest.TestCase):
                         "tm": "114844",
                     },
                     languages={"en": "English", "la": "Latin"},
+                    edition_language="la",
                 ),
             ),
             (
@@ -29,6 +30,7 @@ class TestLoad(unittest.TestCase):
                     title="p.coles.16",
                     idno={"ddb-hybrid": "p.coles;;16", "filename": "p.coles.16", "hgv": "697551", "tm": "697551",},
                     languages={"en": "English", "grc": "Greek"},
+                    edition_language="grc",
                 ),
             ),
             (
@@ -48,7 +50,7 @@ class TestLoad(unittest.TestCase):
                         {"type": "culture", "text": "science"},
                         {"type": "overview", "text": "two medical prescriptions"},
                     ],
-                    languages={},
+                    edition_language="grc",
                 ),
             ),
             (
@@ -80,6 +82,7 @@ class TestLoad(unittest.TestCase):
                         {"type": "overview", "text": "New Testament: Paulus apost.; Coloss. 2.8-19"},
                     ],
                     languages={"en": "English", "cop": "Coptic"},
+                    edition_language="cop",
                 ),
             ),
             (
@@ -117,6 +120,7 @@ class TestLoad(unittest.TestCase):
                         "la": "Latein",
                         "el": "Griechisch",
                     },
+                    commentary="Descr.",
                 ),
             ),
             (
@@ -159,6 +163,7 @@ class TestLoad(unittest.TestCase):
                         "la": "Latein",
                         "el": "Griechisch",
                     },
+                    commentary="Datierung: 2. Aug., 3. Indiktion.",
                 ),
             ),
         ]
@@ -169,4 +174,17 @@ class TestLoad(unittest.TestCase):
                     actual = load(f)
                 except Exception as e:
                     self.fail(f"{filename} has error {e.__class__.__name__}: {e}")
-            self.assertEqual(want, actual, msg=filename)
+
+            self.assertEqual(want.title, actual.title, msg=f"{filename} title")
+            self.assertEqual(want.idno, actual.idno, msg=f"{filename} idno")
+            self.assertEqual(want.material, actual.material, msg=f"{filename} material")
+            self.assertEqual(want.origin_dates, actual.origin_dates, msg=f"{filename} origin_dates")
+            self.assertEqual(want.origin_place, actual.origin_place, msg=f"{filename} origin_place")
+            self.assertEqual(want.provenances, actual.provenances, msg=f"{filename} provenances")
+            self.assertEqual(want.terms, actual.terms, msg=f"{filename} terms")
+            self.assertEqual(want.languages, actual.languages, msg=f"{filename} languages")
+            self.assertEqual(want.commentary, actual.commentary, msg=f"{filename} commentary")
+            self.assertEqual(want.edition_language, actual.edition_language, msg=f"{filename} edition_language")
+            self.assertEqual(
+                want.edition_foreign_languages, actual.edition_foreign_languages, msg=f"{filename} edition_foreign_languages"
+            )

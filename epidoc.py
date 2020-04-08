@@ -1,7 +1,8 @@
 from bs4 import BeautifulSoup
 
+from body import Edition
 from header import History, ProfileDesc
-from normalize import normalize
+from normalize import normalize, normalized_get_text
 
 
 class EpiDoc:
@@ -14,9 +15,25 @@ class EpiDoc:
     provenances = {}
     terms = []
     languages = {}
+    commentary = None
+    edition_language = None
+    edition_foreign_languages = {}
 
     @classmethod
-    def create(cls, title, idno, material=None, origin_dates=None, origin_place=None, provenances=None, terms=None, languages=None):
+    def create(
+        cls,
+        title,
+        idno,
+        material=None,
+        origin_dates=None,
+        origin_place=None,
+        provenances=None,
+        terms=None,
+        languages=None,
+        commentary=None,
+        edition_language=None,
+        edition_foreign_languages=None,
+    ):
         h = cls()
         h.title = title
         h.idno = idno
@@ -31,21 +48,11 @@ class EpiDoc:
             h.terms = terms
         if languages is not None:
             h.languages = languages
+        h.commentary = commentary
+        h.edition_language = edition_language
+        if edition_foreign_languages is not None:
+            h.edition_foreign_languages = edition_foreign_languages
         return h
-
-    def __eq__(self, other):
-        if not isinstance(other, EpiDoc):
-            return False
-        return (
-            self.title == other.title
-            and self.idno == other.idno
-            and self.material == other.material
-            and self.origin_dates == other.origin_dates
-            and self.origin_place == other.origin_place
-            and self.provenances == other.provenances
-            and self.terms == other.terms
-            and self.languages == other.languages
-        )
 
     def __repr__(self):
         return f'<EpiDoc "{self.title}">'
@@ -81,5 +88,12 @@ def loads(s):
     profile_desc = teiheader.profiledesc
     doc.languages = ProfileDesc.lang_usage(profile_desc)
     doc.terms = ProfileDesc.keyword_terms(profile_desc)
+
+    body = soup.body
+    commentary = body.find("div", type="commentary", subtype="general")
+    if commentary:
+        doc.commentary = normalized_get_text(commentary)
+    doc.edition_language = Edition.language(body)
+    doc.edition_foreign_languages = Edition.foreign_languages(body)
 
     return doc
