@@ -4,7 +4,7 @@ from header import History, ProfileDesc
 from normalize import normalize
 
 
-class EpiDocHeader:
+class EpiDoc:
 
     title = None
     idno = {}
@@ -31,7 +31,7 @@ class EpiDocHeader:
         return h
 
     def __eq__(self, other):
-        if not isinstance(other, EpiDocHeader):
+        if not isinstance(other, EpiDoc):
             return False
         return (
             self.title == other.title
@@ -44,26 +44,7 @@ class EpiDocHeader:
         )
 
     def __repr__(self):
-        return f"title={self.title},idno={self.idno},material={self.material},date={self.dates},places={self.places},terms={self.terms},languages={self.languages}"
-
-
-class EpiDoc:
-
-    header = None
-
-    @classmethod
-    def create(cls, header):
-        d = cls()
-        d.header = header
-        return d
-
-    def __eq__(self, other):
-        if not isinstance(other, EpiDoc):
-            return False
-        return self.header == other.header
-
-    def __repr__(self):
-        return f"header={self.header}"
+        return f'<EpiDoc "{self.title}">'
 
 
 def load(fp):
@@ -73,29 +54,27 @@ def load(fp):
 def loads(s):
     soup = BeautifulSoup(s, features="lxml")
 
-    header = EpiDocHeader()
+    doc = EpiDoc()
 
     teiheader = soup.teiheader
     filedesc = teiheader.filedesc
-    header.title = filedesc.titlestmt.title.getText()
+    doc.title = filedesc.titlestmt.title.getText()
     idnos = {}
     for idno in filedesc.publicationstmt.find_all("idno"):
         typ = normalize(idno.attrs.get("type"))
         value = normalize(idno.getText())
         idnos[typ] = value
-    header.idno = idnos
+    doc.idno = idnos
 
     msdesc = filedesc.sourcedesc.msdesc
     if msdesc:
-        header.material = normalize(msdesc.physdesc.objectdesc.support.material.getText())
+        doc.material = normalize(msdesc.physdesc.objectdesc.support.material.getText())
         history = msdesc.history
-        header.dates = History.origin_dates(history)
-        header.places = History.places(history)
+        doc.dates = History.origin_dates(history)
+        doc.places = History.places(history)
 
     profile_desc = teiheader.profiledesc
-    header.languages = ProfileDesc.lang_usage(profile_desc)
-    header.terms = ProfileDesc.keyword_terms(profile_desc)
+    doc.languages = ProfileDesc.lang_usage(profile_desc)
+    doc.terms = ProfileDesc.keyword_terms(profile_desc)
 
-    doc = EpiDoc()
-    doc.header = header
     return doc

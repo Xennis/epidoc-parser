@@ -1,7 +1,7 @@
 import os
 import unittest
 
-from epidoc import EpiDoc, EpiDocHeader, load
+from epidoc import EpiDoc, load
 
 TESTDATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "testdata")
 
@@ -12,8 +12,7 @@ class TestLoad(unittest.TestCase):
             (
                 os.path.join("ddb", "chla.3.198.xml"),
                 EpiDoc.create(
-                    header=EpiDocHeader.create(
-                        title="chla.3.198",
+                    title="chla.3.198",
                         idno={
                             "ddb-hybrid": "chla;3;198",
                             "ddb-perseus-style": "0279;3;198",
@@ -23,24 +22,20 @@ class TestLoad(unittest.TestCase):
                         },
                         terms=[],
                         languages={"en": "English", "la": "Latin"},
-                    )
                 ),
             ),
             (
                 os.path.join("ddb", "p.coles.16.xml"),
                 EpiDoc.create(
-                    header=EpiDocHeader.create(
                         title="p.coles.16",
                         idno={"ddb-hybrid": "p.coles;;16", "filename": "p.coles.16", "hgv": "697551", "tm": "697551",},
                         terms=[],
                         languages={"en": "English", "grc": "Greek"},
-                    )
                 ),
             ),
             (
                 os.path.join("dlcp", "26761.xml"),
                 EpiDoc.create(
-                    header=EpiDocHeader.create(
                         title="Sb. 16 13045",
                         idno={"dclp": "26761", "dclp-hybrid": "sb;16;13045", "filename": "26761", "ldab": "5148", "tm": "26761",},
                         material="papyrus",
@@ -56,13 +51,11 @@ class TestLoad(unittest.TestCase):
                             {"type": "overview", "text": "two medical prescriptions"},
                         ],
                         languages={},
-                    )
                 ),
             ),
             (
                 os.path.join("dlcp", "135858.xml"),
                 EpiDoc.create(
-                    header=EpiDocHeader.create(
                         title="TM 135858",
                         idno={
                             "dclp": "135858",
@@ -95,13 +88,11 @@ class TestLoad(unittest.TestCase):
                             {"type": "overview", "text": "New Testament: Paulus apost.; Coloss. 2.8-19"},
                         ],
                         languages={"en": "English", "cop": "Coptic"},
-                    )
                 ),
             ),
             (
                 os.path.join("hgv", "13003.xml"),
                 EpiDoc.create(
-                    header=EpiDocHeader.create(
                         title="Taxing - list",
                         idno={
                             "filename": "13003",
@@ -134,13 +125,11 @@ class TestLoad(unittest.TestCase):
                             "la": "Latein",
                             "el": "Griechisch",
                         },
-                    )
                 ),
             ),
             (
                 os.path.join("hgv", "74005.xml"),
                 EpiDoc.create(
-                    header=EpiDocHeader.create(
                         title="Ordre de paiement",
                         idno={
                             "filename": "74005",
@@ -178,7 +167,6 @@ class TestLoad(unittest.TestCase):
                             "la": "Latein",
                             "el": "Griechisch",
                         },
-                    )
                 ),
             ),
         ]
