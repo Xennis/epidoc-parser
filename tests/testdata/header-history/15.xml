@@ -1,0 +1,20 @@
+<!-- idp.data/HGV_meta_EpiDoc/HGV317/316739.xml -->
+               <history>
+                  <origin>
+                     <origDate notBefore="-0200" notAfter="-0151">
+                1. Hälfte (?) II v.Chr.
+                <precision n="1" match="../@notBefore" degree="0.1"/>
+                        <precision n="2" match="../@notAfter" degree="0.3"/>
+                     </origDate>
+                  </origin>
+                  <provenance type="located">
+                     <p xml:id="geoHBGE1C">
+                        <placeName n="1"
+                                   type="ancient"
+                                   subtype="nome"
+                                   cert="low"
+                                   ref="https://www.trismegistos.org/place/332 https://pleiades.stoa.org/places/736893">Arsinoites</placeName>
+                        <placeName n="2" type="ancient" subtype="region">Ägypten</placeName>
+                     </p>
+                  </provenance>
+               </history>

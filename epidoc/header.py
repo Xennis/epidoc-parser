@@ -14,6 +14,8 @@ class _History:
     @staticmethod
     def origin_place(history):
         origin_place = history.origin.origplace
+        if not origin_place:
+            return {}
         result = _normalized_attrs(origin_place)
         result["text"] = origin_place.getText().strip()
         return result
