@@ -12,10 +12,15 @@ class History:
         return result
 
     @staticmethod
-    def places(history):
+    def origin_place(history):
         origin_place = history.origin.origplace
         result = normalized_attrs(origin_place)
         result["text"] = origin_place.getText().strip()
+        return result
+
+    @staticmethod
+    def provenances(history):
+        result = {}
         for elem in history.findAll("provenance"):
             typ = elem.attrs.get("type")
             assert typ not in result
