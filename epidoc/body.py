@@ -1,4 +1,4 @@
-from normalize import normalize
+from .normalize import normalize
 
 
 class Edition:

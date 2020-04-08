@@ -1,10 +1,10 @@
 format:
-	black --line-length 132 *.py
+	black --line-length 132 epidoc/ tests/
 
 check: format-check unittest
 
 format-check:
-	black --check --line-length 132 *.py
+	black --check --line-length 132 epidoc/ tests/
 
 unittest:
-	python -m unittest discover -p '*_test.py'
+	python -m unittest discover

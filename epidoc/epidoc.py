@@ -1,8 +1,8 @@
 from bs4 import BeautifulSoup
 
-from body import Edition
-from header import History, ProfileDesc
-from normalize import normalize, normalized_get_text
+from .body import Edition
+from .header import History, ProfileDesc
+from .normalize import normalize, normalized_get_text
 
 
 class EpiDoc:

@@ -3,7 +3,7 @@ import unittest
 
 from bs4 import BeautifulSoup
 
-from header import History, ProfileDesc
+from epidoc.header import History, ProfileDesc
 
 TESTDATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "testdata")
 

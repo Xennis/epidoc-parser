@@ -1,4 +1,4 @@
-from normalize import normalize, normalized_get_text, normalized_attrs
+from .normalize import normalize, normalized_get_text, normalized_attrs
 
 
 class History:
