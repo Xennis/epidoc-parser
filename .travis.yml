@@ -1,10 +1,13 @@
 language: python
 python:
+  - "3.6"
   - "3.7"
+  - "3.8"
 install:
   - pip install --quiet --requirement requirements.txt
 script:
-  - black --line-length 132 *.py
-  - python -m unittest discover -p '*_test.py'
+  - make format-check
+  - make unittest
+  - make publish
 branches:
   only: [master]
