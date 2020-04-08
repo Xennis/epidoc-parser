@@ -193,6 +193,24 @@ class TestHistory(unittest.TestCase):
                     ],
                 },
             ),
+            (
+                "15.xml",
+                [{"notafter": "-0151", "notbefore": "-0200", "text": "1. Hälfte (?) II v.Chr."}],
+                {},
+                {
+                    "located": [
+                        {
+                            "cert": "low",
+                            "n": "1",
+                            "ref": ["https://www.trismegistos.org/place/332", "https://pleiades.stoa.org/places/736893"],
+                            "subtype": "nome",
+                            "text": "Arsinoites",
+                            "type": "ancient",
+                        },
+                        {"n": "2", "subtype": "region", "text": "Ägypten", "type": "ancient"},
+                    ]
+                },
+            ),
         ]
         for (filename, want_origin_dates, want_origin_place, want_provenances) in tests:
             with open(os.path.join(TESTDATA_DIR, "header-history", filename)) as f:

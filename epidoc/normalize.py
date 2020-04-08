@@ -1,6 +1,7 @@
 def _normalize(v):
     if isinstance(v, str):
         return v.lower().strip()
+    return v
 
 
 def _normalized_get_text(raw):
