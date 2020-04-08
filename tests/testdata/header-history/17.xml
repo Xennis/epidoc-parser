@@ -1,0 +1,14 @@
+<!-- idp.data/APIS/yale/xml/yale.apis.0000540000.xml
+special case: provenance without a type
+-->
+               <history>
+                  <origin>
+                     <origDate notBefore="0100" notAfter="0199">Roman CE ii (ca. 162) [BPG]</origDate>
+                  </origin>
+                  <provenance>
+                     <p>Oxyrhynchus</p>
+                  </provenance>
+                  <acquisition>
+                     <p>Acquisition Information, 1904:  Donated by the Egypt Exploration Fund, 1904. From the Egypt Exploration Fund's excavations. Horde includes P.CtYBR inv. 2-6, 9-13, 28 (?), 29 (?), 34, 36, 39, 50-64</p>
+                  </acquisition>
+               </history>

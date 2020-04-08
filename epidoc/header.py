@@ -24,9 +24,10 @@ class _History:
     def provenances(history):
         result = {}
         for elem in history.findAll("provenance"):
-            typ = elem.attrs.get("type")
-            assert typ not in result
-            result[typ] = _History._provenance(elem)
+            typ = _normalize(elem.attrs.get("type"))
+            if typ is None:
+                continue
+            result[typ] = result.get(typ, []) + _History._provenance(elem)
         return result
 
     @staticmethod
