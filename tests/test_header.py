@@ -3,7 +3,7 @@ import unittest
 
 from bs4 import BeautifulSoup
 
-from epidoc.header import History, ProfileDesc
+from epidoc.header import _History, _ProfileDesc
 
 TESTDATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "testdata")
 
@@ -197,11 +197,11 @@ class TestHistory(unittest.TestCase):
         for (filename, want_origin_dates, want_origin_place, want_provenances) in tests:
             with open(os.path.join(TESTDATA_DIR, "header-history", filename)) as f:
                 elem = BeautifulSoup(f.read(), features="lxml").history
-            actual_origin_dates = History.origin_dates(elem)
+            actual_origin_dates = _History.origin_dates(elem)
             self.assertEqual(want_origin_dates, actual_origin_dates, msg=f"{filename} origin dates")
-            actual_origin_place = History.origin_place(elem)
+            actual_origin_place = _History.origin_place(elem)
             self.assertEqual(want_origin_place, actual_origin_place, msg=f"{filename} origin place")
-            actual_provenances = History.provenances(elem)
+            actual_provenances = _History.provenances(elem)
             self.assertEqual(want_provenances, actual_provenances, msg=f"{filename} provenances")
 
 
@@ -311,7 +311,7 @@ class TestProfileDesc(unittest.TestCase):
         for (filename, want_terms, want_langs) in tests:
             with open(os.path.join(TESTDATA_DIR, "header-profile-desc", filename)) as f:
                 elem = BeautifulSoup(f.read(), features="lxml").profiledesc
-            actual_terms = ProfileDesc.keyword_terms(elem)
+            actual_terms = _ProfileDesc.keyword_terms(elem)
             self.assertEqual(want_terms, actual_terms, msg=f"{filename} terms")
-            actual_langs = ProfileDesc.lang_usage(elem)
+            actual_langs = _ProfileDesc.lang_usage(elem)
             self.assertEqual(want_langs, actual_langs, msg=f"{filename} langs")

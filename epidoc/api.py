@@ -1,8 +1,8 @@
 from bs4 import BeautifulSoup
 
-from .body import Edition
-from .header import History, ProfileDesc
-from .normalize import normalize, normalized_get_text
+from .body import _Edition
+from .header import _History, _ProfileDesc
+from .normalize import _normalize, _normalized_get_text
 
 
 class EpiDoc:
@@ -64,7 +64,6 @@ def load(fp):
 
 def loads(s):
     soup = BeautifulSoup(s, features="lxml")
-
     doc = EpiDoc()
 
     teiheader = soup.teiheader
@@ -72,28 +71,28 @@ def loads(s):
     doc.title = filedesc.titlestmt.title.getText()
     idnos = {}
     for idno in filedesc.publicationstmt.find_all("idno"):
-        typ = normalize(idno.attrs.get("type"))
-        value = normalize(idno.getText())
+        typ = _normalize(idno.attrs.get("type"))
+        value = _normalize(idno.getText())
         idnos[typ] = value
     doc.idno = idnos
 
     msdesc = filedesc.sourcedesc.msdesc
     if msdesc:
-        doc.material = normalize(msdesc.physdesc.objectdesc.support.material.getText())
+        doc.material = _normalize(msdesc.physdesc.objectdesc.support.material.getText())
         history = msdesc.history
-        doc.origin_dates = History.origin_dates(history)
-        doc.origin_place = History.origin_place(history)
-        doc.provenances = History.provenances(history)
+        doc.origin_dates = _History.origin_dates(history)
+        doc.origin_place = _History.origin_place(history)
+        doc.provenances = _History.provenances(history)
 
     profile_desc = teiheader.profiledesc
-    doc.languages = ProfileDesc.lang_usage(profile_desc)
-    doc.terms = ProfileDesc.keyword_terms(profile_desc)
+    doc.languages = _ProfileDesc.lang_usage(profile_desc)
+    doc.terms = _ProfileDesc.keyword_terms(profile_desc)
 
     body = soup.body
     commentary = body.find("div", type="commentary", subtype="general")
     if commentary:
-        doc.commentary = normalized_get_text(commentary)
-    doc.edition_language = Edition.language(body)
-    doc.edition_foreign_languages = Edition.foreign_languages(body)
+        doc.commentary = _normalized_get_text(commentary)
+    doc.edition_language = _Edition.language(body)
+    doc.edition_foreign_languages = _Edition.foreign_languages(body)
 
     return doc
