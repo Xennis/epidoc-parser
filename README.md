@@ -4,12 +4,9 @@
 
 ## Development
 
-Requirements:
-* Python 3.7 is installed
-
 Create a virtual environment, enable it and install the dependencies
 ```sh
-python3.7 -m venv .env
+python3 -m venv .env
 source .env/bin/activate
 pip install --requirement requirements.txt
 ```
