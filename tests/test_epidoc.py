@@ -1,7 +1,7 @@
 import os
 import unittest
 
-from epidoc import EpiDoc, load
+from epidoc.epidoc import EpiDoc, load
 
 TESTDATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "testdata")
 
