@@ -18,7 +18,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     name="epidoc",
     packages=["epidoc"],
-    python_requires=">=3.7",
+    python_requires=">=3.6",
     url="https://github.com/Xennis/epidoc-parser",
     version="0.0.1",
 )
