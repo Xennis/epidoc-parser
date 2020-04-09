@@ -1,3 +1,4 @@
 beautifulsoup4==4.9.0
 black==19.10b0  # Code formatter
+GitPython==3.1.0  # Only required for integration test setup
 lxml==4.5.0
