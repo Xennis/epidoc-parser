@@ -1,9 +1,25 @@
 import os
 import unittest
 
-from epidoc import EpiDoc, load
+from epidoc import EpiDoc, load, loads
 
 TESTDATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "testdata")
+
+
+def assertEpiDoc(test, want, actual, msg_prefix=""):
+    test.assertEqual(want.title, actual.title, msg=f"{msg_prefix} title")
+    test.assertEqual(want.idno, actual.idno, msg=f"{msg_prefix} idno")
+    test.assertEqual(want.material, actual.material, msg=f"{msg_prefix} material")
+    test.assertEqual(want.origin_dates, actual.origin_dates, msg=f"{msg_prefix} origin_dates")
+    test.assertEqual(want.origin_place, actual.origin_place, msg=f"{msg_prefix} origin_place")
+    test.assertEqual(want.provenances, actual.provenances, msg=f"{msg_prefix} provenances")
+    test.assertEqual(want.terms, actual.terms, msg=f"{msg_prefix} terms")
+    test.assertEqual(want.languages, actual.languages, msg=f"{msg_prefix} languages")
+    test.assertEqual(want.commentary, actual.commentary, msg=f"{msg_prefix} commentary")
+    test.assertEqual(want.edition_language, actual.edition_language, msg=f"{msg_prefix} edition_language")
+    test.assertEqual(
+        want.edition_foreign_languages, actual.edition_foreign_languages, msg=f"{msg_prefix} edition_foreign_languages"
+    )
 
 
 class TestLoad(unittest.TestCase):
@@ -188,17 +204,48 @@ class TestLoad(unittest.TestCase):
                     actual = load(f)
                 except Exception as e:
                     self.fail(f"{filename} has error {e.__class__.__name__}: {e}")
+            assertEpiDoc(self, want, actual, msg_prefix=filename)
 
-            self.assertEqual(want.title, actual.title, msg=f"{filename} title")
-            self.assertEqual(want.idno, actual.idno, msg=f"{filename} idno")
-            self.assertEqual(want.material, actual.material, msg=f"{filename} material")
-            self.assertEqual(want.origin_dates, actual.origin_dates, msg=f"{filename} origin_dates")
-            self.assertEqual(want.origin_place, actual.origin_place, msg=f"{filename} origin_place")
-            self.assertEqual(want.provenances, actual.provenances, msg=f"{filename} provenances")
-            self.assertEqual(want.terms, actual.terms, msg=f"{filename} terms")
-            self.assertEqual(want.languages, actual.languages, msg=f"{filename} languages")
-            self.assertEqual(want.commentary, actual.commentary, msg=f"{filename} commentary")
-            self.assertEqual(want.edition_language, actual.edition_language, msg=f"{filename} edition_language")
-            self.assertEqual(
-                want.edition_foreign_languages, actual.edition_foreign_languages, msg=f"{filename} edition_foreign_languages"
-            )
+
+class TestLoads(unittest.TestCase):
+    def test_one(self):
+        filename = os.path.join(TESTDATA_DIR, "full", "hgv", "74005.xml")
+        want = EpiDoc.create(
+            title="Ordre de paiement",
+            idno={
+                "filename": "74005",
+                "tm": "74005",
+                "ddb-perseus-style": "0022;4;452",
+                "ddb-filename": "o.douch.4.452",
+                "ddb-hybrid": "o.douch;4;452",
+            },
+            material="ostrakon",
+            origin_dates=[{"text": "IV - Anfang V", "notbefore": "0301", "notafter": "0425", "precision": "low",}],
+            origin_place={"text": "Kysis (Oasis Magna)",},
+            provenances={
+                "located": [
+                    {
+                        "text": "Kysis",
+                        "type": "ancient",
+                        "ref": ["http://pleiades.stoa.org/places/776191", "http://www.trismegistos.org/place/2761",],
+                    },
+                    {"text": "Oasis Magna", "type": "ancient", "subtype": "region",},
+                ],
+            },
+            terms=[{"text": "Anweisung"}, {"text": "Zahlung"}, {"text": "Militär"}, {"text": "Fleisch"}, {"text": "Getreide"},],
+            languages={
+                "fr": "Französisch",
+                "en": "Englisch",
+                "de": "Deutsch",
+                "it": "Italienisch",
+                "es": "Spanisch",
+                "la": "Latein",
+                "el": "Griechisch",
+            },
+            commentary="Datierung: 2. Aug., 3. Indiktion.",
+        )
+        with open(filename) as f:
+            doc_string = f.read()
+        assert isinstance(doc_string, str), "input is a string"
+        actual = loads(doc_string)
+        assertEpiDoc(self, want, actual, msg_prefix=filename)

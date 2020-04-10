@@ -1,6 +1,59 @@
-# epidoc-parser
+# EpiDoc Parser
 
 [![Build Status](https://travis-ci.org/Xennis/epidoc-parser.svg?branch=master)](https://travis-ci.org/Xennis/epidoc-parser)
+
+Python parser for EpiDoc (epigraphic documents in TEI XML).
+
+## Usage
+
+### Installation 
+
+Install the package
+```sh
+pip install git+https://github.com/Xennis/epidoc-parser
+```
+
+### Load a document
+
+Load a document from a file
+```python
+import epidoc
+
+with open("my-epidoc.xml") as f:
+    doc = epidoc.load(f)
+```
+
+Load a document from a string
+```python
+import epidoc
+
+my_epidoc = """<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.stoa.org/epidoc/schema/8.13/tei-epidoc.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:id="hgv74005">
+   [...]
+</TEI>
+"""
+
+doc = epidoc.loads(my_epidoc)
+```
+
+### Get data from a document
+
+Call the attributes, for example
+```python
+>>> doc.title
+"Ordre de paiement"
+>>> doc.material
+"ostrakon"
+>>> doc.languages
+{"en": "Englisch", "la": "Latein", "el": "Griechisch"}
+>>> [t.get("text") for t in doc.terms]
+["Anweisung", "Zahlung", "Getreide"]
+>>> doc.origin_place.get("text")
+"Kysis (Oasis Magna)"
+>>> doc.origin_dates[0]
+{"notbefore": "0301", "notafter": "0425", "precision": "low", "text": "IV - Anfang V"}
+```
 
 ## Development
 
