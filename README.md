@@ -55,6 +55,22 @@ Call the attributes, for example
 {"notbefore": "0301", "notafter": "0425", "precision": "low", "text": "IV - Anfang V"}
 ```
 
+## Documentation
+
+| Field                     | EpiDoc source element (XPath)                                                  |
+|---------------------------|--------------------------------------------------------------------------------|
+| commentary                | `//body/div[@type='commentary' and @subtype='general']`                        |
+| edition_foreign_languages | `//body/div[@type='edition']//foreign/@xml:lang`                               |
+| edition_language          | `//body/div[@type='edition']/@xml:lang`                                        |
+| idno                      | `//teiHeader/fileDesc/publicationStmt/idno`                                    |
+| languages                 | `//teiHeader/profileDesc/langUsage/language`                                   |
+| material                  | `//teiHeader/fileDesc/sourceDesc/msDesc/physDesc/objectDesc//support/material` |
+| origin_dates              | `//teiHeader/fileDesc/sourceDesc/msDesc/history/origin/origDate`               |
+| origin_place              | `//teiHeader/fileDesc/sourceDesc/msDesc/history/origin/origPlace`              |
+| provenances               | `//teiHeader/fileDesc/sourceDesc/msDesc/history/provenance`                    |
+| terms                     | `//teiHeader/profileDesc/textClass//term`                                      |
+| title                     | `//teiHeader/fileDesc/titleStmt/title`                                         |
+
 ## Development
 
 Create a virtual environment, enable it and install the dependencies
