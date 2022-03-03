@@ -1,0 +1,21 @@
+name: Python
+on: push
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [ '3.7', '3.8', '3.9', '3.10' ]
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: pip install --requirement requirements.txt
+    - name: Check lint and test
+      run: make check
+    - name: Check publish
+      run: make publish
