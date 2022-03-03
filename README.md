@@ -1,6 +1,6 @@
 # EpiDoc Parser
 
-[![Build Status](https://travis-ci.org/Xennis/epidoc-parser.svg?branch=master)](https://travis-ci.org/Xennis/epidoc-parser)
+[![Python](https://github.com/Xennis/epidoc-parser/actions/workflows/python.yml/badge.svg?branch=master&event=push)](https://github.com/Xennis/epidoc-parser/actions/workflows/python.yml?query=event%3Apush+branch%3Amaster)
 
 Python parser for EpiDoc (epigraphic documents in TEI XML).
 
