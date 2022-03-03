@@ -407,14 +407,15 @@ class TestHistory(unittest.TestCase):
             ),
         ]
         for (filename, want_origin_dates, want_origin_place, want_provenances) in tests:
-            with open(os.path.join(TESTDATA_DIR, "header-history", filename)) as f:
-                elem = BeautifulSoup(f.read(), features="lxml").history
-            actual_origin_dates = _History.origin_dates(elem)
-            self.assertEqual(want_origin_dates, actual_origin_dates, msg=f"{filename} origin dates")
-            actual_origin_place = _History.origin_place(elem)
-            self.assertEqual(want_origin_place, actual_origin_place, msg=f"{filename} origin place")
-            actual_provenances = _History.provenances(elem)
-            self.assertEqual(want_provenances, actual_provenances, msg=f"{filename} provenances")
+            with self.subTest(filename):
+                with open(os.path.join(TESTDATA_DIR, "header-history", filename)) as f:
+                    elem = BeautifulSoup(f.read(), features="lxml").history
+                actual_origin_dates = _History.origin_dates(elem)
+                self.assertEqual(want_origin_dates, actual_origin_dates, msg="origin dates")
+                actual_origin_place = _History.origin_place(elem)
+                self.assertEqual(want_origin_place, actual_origin_place, msg="origin place")
+                actual_provenances = _History.provenances(elem)
+                self.assertEqual(want_provenances, actual_provenances, msg="provenances")
 
 
 class TestProfileDesc(unittest.TestCase):
@@ -525,9 +526,10 @@ class TestProfileDesc(unittest.TestCase):
             ),
         ]
         for (filename, want_terms, want_langs) in tests:
-            with open(os.path.join(TESTDATA_DIR, "header-profile-desc", filename)) as f:
-                elem = BeautifulSoup(f.read(), features="lxml").profiledesc
-            actual_terms = _ProfileDesc.keyword_terms(elem)
-            self.assertEqual(want_terms, actual_terms, msg=f"{filename} terms")
-            actual_langs = _ProfileDesc.lang_usage(elem)
-            self.assertEqual(want_langs, actual_langs, msg=f"{filename} langs")
+            with self.subTest(filename):
+                with open(os.path.join(TESTDATA_DIR, "header-profile-desc", filename)) as f:
+                    elem = BeautifulSoup(f.read(), features="lxml").profiledesc
+                actual_terms = _ProfileDesc.keyword_terms(elem)
+                self.assertEqual(want_terms, actual_terms, msg="terms")
+                actual_langs = _ProfileDesc.lang_usage(elem)
+                self.assertEqual(want_langs, actual_langs, msg="langs")
