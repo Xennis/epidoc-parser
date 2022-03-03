@@ -11,7 +11,9 @@ requires = [
 setuptools.setup(
     author="Xennis",
     author_email="code@xennis.org",
-    classifiers=["Programming Language :: Python :: 3",],
+    classifiers=[
+        "Programming Language :: Python :: 3",
+    ],
     description="A small example package",
     install_requires=requires,
     long_description=long_description,

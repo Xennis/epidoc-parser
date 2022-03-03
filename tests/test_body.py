@@ -11,8 +11,16 @@ TESTDATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "testdat
 class EditionTest(unittest.TestCase):
     def test_all(self):
         tests = [
-            ("1.xml", "grc", {"la": 2},),
-            ("2.xml", "grc", {"la": 26},),
+            (
+                "1.xml",
+                "grc",
+                {"la": 2},
+            ),
+            (
+                "2.xml",
+                "grc",
+                {"la": 26},
+            ),
         ]
         for (filename, want_language, want_foreign_languages) in tests:
             with open(os.path.join(TESTDATA_DIR, "body", filename)) as f:

@@ -13,24 +13,50 @@ class TestHistory(unittest.TestCase):
         tests = [
             (
                 "1.xml",
-                [{"text": "30. Jan. 3 v.Chr.", "when": "-0003-01-30",}],
-                {"text": "Paimis (Oxyrhynchites)",},
+                [
+                    {
+                        "text": "30. Jan. 3 v.Chr.",
+                        "when": "-0003-01-30",
+                    }
+                ],
+                {
+                    "text": "Paimis (Oxyrhynchites)",
+                },
                 {
                     "located": [
                         {
-                            "ref": ["http://pleiades.stoa.org/places/736986", "http://www.trismegistos.org/place/2869",],
+                            "ref": [
+                                "http://pleiades.stoa.org/places/736986",
+                                "http://www.trismegistos.org/place/2869",
+                            ],
                             "text": "Paimis",
                             "type": "ancient",
                         },
-                        {"subtype": "nome", "text": "Oxyrhynchites", "type": "ancient",},
-                        {"subtype": "region", "text": "Ägypten", "type": "ancient",},
+                        {
+                            "subtype": "nome",
+                            "text": "Oxyrhynchites",
+                            "type": "ancient",
+                        },
+                        {
+                            "subtype": "region",
+                            "text": "Ägypten",
+                            "type": "ancient",
+                        },
                     ],
                 },
             ),
             (
                 "2.xml",
-                [{"notafter": "0909", "notbefore": "0881", "text": "881 - 909",}],
-                {"text": "Found: Middle Egypt (Egypt); written: Middle Egypt (Egypt)",},
+                [
+                    {
+                        "notafter": "0909",
+                        "notbefore": "0881",
+                        "text": "881 - 909",
+                    }
+                ],
+                {
+                    "text": "Found: Middle Egypt (Egypt); written: Middle Egypt (Egypt)",
+                },
                 {
                     "composed": [
                         {
@@ -39,7 +65,11 @@ class TestHistory(unittest.TestCase):
                             "text": "Middle Egypt",
                             "type": "ancient",
                         },
-                        {"subtype": "region", "text": "Egypt", "type": "ancient",},
+                        {
+                            "subtype": "region",
+                            "text": "Egypt",
+                            "type": "ancient",
+                        },
                     ],
                     "found": [
                         {
@@ -48,77 +78,198 @@ class TestHistory(unittest.TestCase):
                             "text": "Middle Egypt",
                             "type": "ancient",
                         },
-                        {"subtype": "region", "text": "Egypt", "type": "ancient",},
+                        {
+                            "subtype": "region",
+                            "text": "Egypt",
+                            "type": "ancient",
+                        },
                     ],
                 },
             ),
             (
                 "3.xml",
-                [{"notafter": "0225", "notbefore": "0101", "precision": "low", "text": "II - Anfang III",}],
-                {"text": "unbekannt (Hermopolites ?)",},
+                [
+                    {
+                        "notafter": "0225",
+                        "notbefore": "0101",
+                        "precision": "low",
+                        "text": "II - Anfang III",
+                    }
+                ],
+                {
+                    "text": "unbekannt (Hermopolites ?)",
+                },
                 {
                     "found": [{"text": "unbekannt"}],
                     "located": [
-                        {"cert": "low", "subtype": "nome", "text": "Hermopolites", "type": "ancient",},
-                        {"subtype": "region", "text": "Ägypten", "type": "ancient",},
+                        {
+                            "cert": "low",
+                            "subtype": "nome",
+                            "text": "Hermopolites",
+                            "type": "ancient",
+                        },
+                        {
+                            "subtype": "region",
+                            "text": "Ägypten",
+                            "type": "ancient",
+                        },
                     ],
                 },
             ),
             (
                 "4.xml",
                 # TODO: Parse certainty
-                [{"text": "9. Okt. 141 (Monat und Tag unsicher)", "when": "0141-10-09",}],
-                {"text": "Soknopaiu Nesos (Arsinoites)",},
+                [
+                    {
+                        "text": "9. Okt. 141 (Monat und Tag unsicher)",
+                        "when": "0141-10-09",
+                    }
+                ],
+                {
+                    "text": "Soknopaiu Nesos (Arsinoites)",
+                },
                 {
                     "located": [
                         {
-                            "ref": ["http://pleiades.stoa.org/places/737053", "http://www.trismegistos.org/place/2157",],
+                            "ref": [
+                                "http://pleiades.stoa.org/places/737053",
+                                "http://www.trismegistos.org/place/2157",
+                            ],
                             "text": "Soknopaiu Nesos",
                             "type": "ancient",
                         },
-                        {"subtype": "nome", "text": "Arsinoites", "type": "ancient",},
-                        {"subtype": "region", "text": "Ägypten", "type": "ancient",},
+                        {
+                            "subtype": "nome",
+                            "text": "Arsinoites",
+                            "type": "ancient",
+                        },
+                        {
+                            "subtype": "region",
+                            "text": "Ägypten",
+                            "type": "ancient",
+                        },
                     ],
                 },
             ),
             (
                 "5.xml",
-                [{"notafter": "0143", "notbefore": "0142", "text": "142 - 143",}],
-                {"text": "unbekannt (Oberägypten)",},
-                {"found": [{"text": "unbekannt"}], "located": [{"subtype": "region", "text": "Oberägypten", "type": "ancient",}],},
+                [
+                    {
+                        "notafter": "0143",
+                        "notbefore": "0142",
+                        "text": "142 - 143",
+                    }
+                ],
+                {
+                    "text": "unbekannt (Oberägypten)",
+                },
+                {
+                    "found": [{"text": "unbekannt"}],
+                    "located": [
+                        {
+                            "subtype": "region",
+                            "text": "Oberägypten",
+                            "type": "ancient",
+                        }
+                    ],
+                },
             ),
             (
                 "6.xml",
-                [{"notafter": "0400", "notbefore": "0001", "precision": "low", "text": "I - IV",}],
+                [
+                    {
+                        "notafter": "0400",
+                        "notbefore": "0001",
+                        "precision": "low",
+                        "text": "I - IV",
+                    }
+                ],
                 {"text": "unbekannt"},
                 {},
             ),
             (
                 "7.xml",
-                [{"notafter": "0710", "notbefore": "0709", "text": "ṣafar 91 AH",}],
-                {"ref": "http://www.trismegistos.org/place/237", "text": "Išqawh",},
-                {"located": [{"ref": ["http://www.trismegistos.org/place/237"], "text": "Išqawh",}],},
+                [
+                    {
+                        "notafter": "0710",
+                        "notbefore": "0709",
+                        "text": "ṣafar 91 AH",
+                    }
+                ],
+                {
+                    "ref": "http://www.trismegistos.org/place/237",
+                    "text": "Išqawh",
+                },
+                {
+                    "located": [
+                        {
+                            "ref": ["http://www.trismegistos.org/place/237"],
+                            "text": "Išqawh",
+                        }
+                    ],
+                },
             ),
             (
                 "8.xml",
-                [{"notafter": "1132", "notbefore": "1132", "text": "2nd decade of muḥarram 527 AH",}],
-                {"ref": "http://www.trismegistos.org/place/332", "text": "unknown (al-Fayyūm)",},
-                {"located": [{"ref": ["http://www.trismegistos.org/place/332"], "text": "unknown (al-Fayyūm)",}],},
+                [
+                    {
+                        "notafter": "1132",
+                        "notbefore": "1132",
+                        "text": "2nd decade of muḥarram 527 AH",
+                    }
+                ],
+                {
+                    "ref": "http://www.trismegistos.org/place/332",
+                    "text": "unknown (al-Fayyūm)",
+                },
+                {
+                    "located": [
+                        {
+                            "ref": ["http://www.trismegistos.org/place/332"],
+                            "text": "unknown (al-Fayyūm)",
+                        }
+                    ],
+                },
             ),
             (
                 "9.xml",
-                [{"cert": "low", "precision": "medium", "text": "ca. 340 (?)", "when": "0340",}],
-                {"text": "Hermopolites",},
+                [
+                    {
+                        "cert": "low",
+                        "precision": "medium",
+                        "text": "ca. 340 (?)",
+                        "when": "0340",
+                    }
+                ],
+                {
+                    "text": "Hermopolites",
+                },
                 {
                     "located": [
-                        {"subtype": "nome", "text": "Hermopolites", "type": "ancient",},
-                        {"subtype": "region", "text": "Ägypten", "type": "ancient",},
+                        {
+                            "subtype": "nome",
+                            "text": "Hermopolites",
+                            "type": "ancient",
+                        },
+                        {
+                            "subtype": "region",
+                            "text": "Ägypten",
+                            "type": "ancient",
+                        },
                     ],
                 },
             ),
             (
                 "10.xml",
-                [{"cert": "low", "notafter": "-0001", "notbefore": "-0200", "precision": "low", "text": "II - I v.Chr. (?)",}],
+                [
+                    {
+                        "cert": "low",
+                        "notafter": "-0001",
+                        "notbefore": "-0200",
+                        "precision": "low",
+                        "text": "II - I v.Chr. (?)",
+                    }
+                ],
                 {"text": "unbekannt"},
                 {},
             ),
@@ -141,7 +292,9 @@ class TestHistory(unittest.TestCase):
                         "xml:id": "datealternativey",
                     },
                 ],
-                {"text": "Oxyrhynchos",},
+                {
+                    "text": "Oxyrhynchos",
+                },
                 {
                     "located": [
                         {
@@ -158,8 +311,16 @@ class TestHistory(unittest.TestCase):
             ),
             (
                 "13.xml",
-                [{"notafter": "0162-01", "notbefore": "0161-09", "text": "ca. Sept. 161 - Jan. 162",}],
-                {"text": "Oxyrhynchos",},
+                [
+                    {
+                        "notafter": "0162-01",
+                        "notbefore": "0161-09",
+                        "text": "ca. Sept. 161 - Jan. 162",
+                    }
+                ],
+                {
+                    "text": "Oxyrhynchos",
+                },
                 {
                     "located": [
                         {
@@ -176,8 +337,17 @@ class TestHistory(unittest.TestCase):
             ),
             (
                 "14.xml",
-                [{"notafter": "0750", "notbefore": "0701", "precision": "low", "text": None,}],
-                {"text": "Theben",},
+                [
+                    {
+                        "notafter": "0750",
+                        "notbefore": "0701",
+                        "precision": "low",
+                        "text": None,
+                    }
+                ],
+                {
+                    "text": "Theben",
+                },
                 {
                     "located": [
                         {
@@ -189,7 +359,12 @@ class TestHistory(unittest.TestCase):
                             "text": "Theben",
                             "type": "ancient",
                         },
-                        {"key": "aegyptus", "subtype": "region", "text": "Ägypten", "type": "ancient",},
+                        {
+                            "key": "aegyptus",
+                            "subtype": "region",
+                            "text": "Ägypten",
+                            "type": "ancient",
+                        },
                     ],
                 },
             ),
@@ -224,7 +399,12 @@ class TestHistory(unittest.TestCase):
                     ]
                 },
             ),
-            ("17.xml", [{"notafter": "0199", "notbefore": "0100", "text": "Roman CE ii (ca. 162) [BPG]"}], {}, {},),
+            (
+                "17.xml",
+                [{"notafter": "0199", "notbefore": "0100", "text": "Roman CE ii (ca. 162) [BPG]"}],
+                {},
+                {},
+            ),
         ]
         for (filename, want_origin_dates, want_origin_place, want_provenances) in tests:
             with open(os.path.join(TESTDATA_DIR, "header-history", filename)) as f:
@@ -329,7 +509,11 @@ class TestProfileDesc(unittest.TestCase):
                     "la": "Latein",
                 },
             ),
-            ("7.xml", [], {"egy-egyd": "Demotic", "en": "English", "grc": "Greek"},),
+            (
+                "7.xml",
+                [],
+                {"egy-egyd": "Demotic", "en": "English", "grc": "Greek"},
+            ),
             (
                 "8.xml",
                 [

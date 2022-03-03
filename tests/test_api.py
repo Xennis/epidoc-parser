@@ -27,7 +27,10 @@ class TestLoad(unittest.TestCase):
         tests = [
             (
                 os.path.join("apd", "apd59t.xml"),
-                EpiDoc.create(title="P.Heid.Arab. I p. 6-7", idno={"filename": "pap(23new)", "tm": "106496"},),
+                EpiDoc.create(
+                    title="P.Heid.Arab. I p. 6-7",
+                    idno={"filename": "pap(23new)", "tm": "106496"},
+                ),
             ),
             (
                 os.path.join("apis", "yale.apis.0000540000.xml"),
@@ -58,7 +61,12 @@ class TestLoad(unittest.TestCase):
                 os.path.join("ddb", "p.coles.16.xml"),
                 EpiDoc.create(
                     title="p.coles.16",
-                    idno={"ddb-hybrid": "p.coles;;16", "filename": "p.coles.16", "hgv": "697551", "tm": "697551",},
+                    idno={
+                        "ddb-hybrid": "p.coles;;16",
+                        "filename": "p.coles.16",
+                        "hgv": "697551",
+                        "tm": "697551",
+                    },
                     languages={"en": "English", "grc": "Greek"},
                     edition_language="grc",
                 ),
@@ -67,13 +75,39 @@ class TestLoad(unittest.TestCase):
                 os.path.join("dlcp", "26761.xml"),
                 EpiDoc.create(
                     title="Sb. 16 13045",
-                    idno={"dclp": "26761", "dclp-hybrid": "sb;16;13045", "filename": "26761", "ldab": "5148", "tm": "26761",},
+                    idno={
+                        "dclp": "26761",
+                        "dclp-hybrid": "sb;16;13045",
+                        "filename": "26761",
+                        "ldab": "5148",
+                        "tm": "26761",
+                    },
                     material="papyrus",
-                    origin_dates=[{"text": "100 - 299", "notbefore": "0100", "notafter": "0299",}],
-                    origin_place={"text": "Found: Egypt; written: Egypt",},
+                    origin_dates=[
+                        {
+                            "text": "100 - 299",
+                            "notbefore": "0100",
+                            "notafter": "0299",
+                        }
+                    ],
+                    origin_place={
+                        "text": "Found: Egypt; written: Egypt",
+                    },
                     provenances={
-                        "found": [{"text": "Egypt", "type": "ancient", "subtype": "region",}],
-                        "composed": [{"text": "Egypt", "type": "ancient", "subtype": "region",}],
+                        "found": [
+                            {
+                                "text": "Egypt",
+                                "type": "ancient",
+                                "subtype": "region",
+                            }
+                        ],
+                        "composed": [
+                            {
+                                "text": "Egypt",
+                                "type": "ancient",
+                                "subtype": "region",
+                            }
+                        ],
                     },
                     terms=[
                         {"text": "medicine"},
@@ -87,20 +121,58 @@ class TestLoad(unittest.TestCase):
                 os.path.join("dlcp", "135858.xml"),
                 EpiDoc.create(
                     title="TM 135858",
-                    idno={"dclp": "135858", "dclp-hybrid": "tm;;135858", "filename": "135858", "ldab": "135858", "tm": "135858",},
+                    idno={
+                        "dclp": "135858",
+                        "dclp-hybrid": "tm;;135858",
+                        "filename": "135858",
+                        "ldab": "135858",
+                        "tm": "135858",
+                    },
                     material="parchment",
-                    origin_dates=[{"text": "550 - 649", "notbefore": "0550", "notafter": "0649",}],
-                    origin_place={"text": "Found: Naqlun (Arsinoites, Egypt); written: Naqlun (Arsinoites, Egypt)",},
+                    origin_dates=[
+                        {
+                            "text": "550 - 649",
+                            "notbefore": "0550",
+                            "notafter": "0649",
+                        }
+                    ],
+                    origin_place={
+                        "text": "Found: Naqlun (Arsinoites, Egypt); written: Naqlun (Arsinoites, Egypt)",
+                    },
                     provenances={
                         "found": [
-                            {"text": "Arsinoites", "type": "ancient", "subtype": "nome",},
-                            {"text": "Egypt", "type": "ancient", "subtype": "region",},
-                            {"text": "Naqlun", "type": "ancient", "ref": ["https://www.trismegistos.org/place/1418"],},
+                            {
+                                "text": "Arsinoites",
+                                "type": "ancient",
+                                "subtype": "nome",
+                            },
+                            {
+                                "text": "Egypt",
+                                "type": "ancient",
+                                "subtype": "region",
+                            },
+                            {
+                                "text": "Naqlun",
+                                "type": "ancient",
+                                "ref": ["https://www.trismegistos.org/place/1418"],
+                            },
                         ],
                         "composed": [
-                            {"text": "Arsinoites", "type": "ancient", "subtype": "nome",},
-                            {"text": "Egypt", "type": "ancient", "subtype": "region",},
-                            {"text": "Naqlun", "type": "ancient", "ref": ["https://www.trismegistos.org/place/1418"],},
+                            {
+                                "text": "Arsinoites",
+                                "type": "ancient",
+                                "subtype": "nome",
+                            },
+                            {
+                                "text": "Egypt",
+                                "type": "ancient",
+                                "subtype": "region",
+                            },
+                            {
+                                "text": "Naqlun",
+                                "type": "ancient",
+                                "ref": ["https://www.trismegistos.org/place/1418"],
+                            },
                         ],
                     },
                     terms=[
@@ -127,17 +199,36 @@ class TestLoad(unittest.TestCase):
                         "ddb-hybrid": "p.ryl;2;371v",
                     },
                     material="papyrus",
-                    origin_dates=[{"text": "134 - 135", "notbefore": "0134", "notafter": "0135",}],
-                    origin_place={"text": "Philopator alias Theogenus (Arsinoites)",},
+                    origin_dates=[
+                        {
+                            "text": "134 - 135",
+                            "notbefore": "0134",
+                            "notafter": "0135",
+                        }
+                    ],
+                    origin_place={
+                        "text": "Philopator alias Theogenus (Arsinoites)",
+                    },
                     provenances={
                         "located": [
                             {
                                 "text": "Philopator alias Theogenus",
                                 "type": "ancient",
-                                "ref": ["http://pleiades.stoa.org/places/741563", "http://www.trismegistos.org/place/1776",],
+                                "ref": [
+                                    "http://pleiades.stoa.org/places/741563",
+                                    "http://www.trismegistos.org/place/1776",
+                                ],
                             },
-                            {"text": "Arsinoites", "type": "ancient", "subtype": "nome",},
-                            {"text": "Ägypten", "type": "ancient", "subtype": "region",},
+                            {
+                                "text": "Arsinoites",
+                                "type": "ancient",
+                                "subtype": "nome",
+                            },
+                            {
+                                "text": "Ägypten",
+                                "type": "ancient",
+                                "subtype": "region",
+                            },
                         ],
                     },
                     terms=[{"text": "Erklärung (Steuer)"}],
@@ -165,16 +256,32 @@ class TestLoad(unittest.TestCase):
                         "ddb-hybrid": "o.douch;4;452",
                     },
                     material="ostrakon",
-                    origin_dates=[{"text": "IV - Anfang V", "notbefore": "0301", "notafter": "0425", "precision": "low",}],
-                    origin_place={"text": "Kysis (Oasis Magna)",},
+                    origin_dates=[
+                        {
+                            "text": "IV - Anfang V",
+                            "notbefore": "0301",
+                            "notafter": "0425",
+                            "precision": "low",
+                        }
+                    ],
+                    origin_place={
+                        "text": "Kysis (Oasis Magna)",
+                    },
                     provenances={
                         "located": [
                             {
                                 "text": "Kysis",
                                 "type": "ancient",
-                                "ref": ["http://pleiades.stoa.org/places/776191", "http://www.trismegistos.org/place/2761",],
+                                "ref": [
+                                    "http://pleiades.stoa.org/places/776191",
+                                    "http://www.trismegistos.org/place/2761",
+                                ],
                             },
-                            {"text": "Oasis Magna", "type": "ancient", "subtype": "region",},
+                            {
+                                "text": "Oasis Magna",
+                                "type": "ancient",
+                                "subtype": "region",
+                            },
                         ],
                     },
                     terms=[
@@ -220,19 +327,41 @@ class TestLoads(unittest.TestCase):
                 "ddb-hybrid": "o.douch;4;452",
             },
             material="ostrakon",
-            origin_dates=[{"text": "IV - Anfang V", "notbefore": "0301", "notafter": "0425", "precision": "low",}],
-            origin_place={"text": "Kysis (Oasis Magna)",},
+            origin_dates=[
+                {
+                    "text": "IV - Anfang V",
+                    "notbefore": "0301",
+                    "notafter": "0425",
+                    "precision": "low",
+                }
+            ],
+            origin_place={
+                "text": "Kysis (Oasis Magna)",
+            },
             provenances={
                 "located": [
                     {
                         "text": "Kysis",
                         "type": "ancient",
-                        "ref": ["http://pleiades.stoa.org/places/776191", "http://www.trismegistos.org/place/2761",],
+                        "ref": [
+                            "http://pleiades.stoa.org/places/776191",
+                            "http://www.trismegistos.org/place/2761",
+                        ],
                     },
-                    {"text": "Oasis Magna", "type": "ancient", "subtype": "region",},
+                    {
+                        "text": "Oasis Magna",
+                        "type": "ancient",
+                        "subtype": "region",
+                    },
                 ],
             },
-            terms=[{"text": "Anweisung"}, {"text": "Zahlung"}, {"text": "Militär"}, {"text": "Fleisch"}, {"text": "Getreide"},],
+            terms=[
+                {"text": "Anweisung"},
+                {"text": "Zahlung"},
+                {"text": "Militär"},
+                {"text": "Fleisch"},
+                {"text": "Getreide"},
+            ],
             languages={
                 "fr": "Französisch",
                 "en": "Englisch",
