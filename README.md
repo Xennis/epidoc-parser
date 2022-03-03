@@ -9,7 +9,7 @@ Python parser for EpiDoc (epigraphic documents in TEI XML).
 ### Installation 
 
 Install the package
-```sh
+```shell
 pip install git+https://github.com/Xennis/epidoc-parser
 ```
 
@@ -74,14 +74,14 @@ Call the attributes, for example
 ## Development
 
 Create a virtual environment, enable it and install the dependencies
-```sh
-python3 -m venv .env
-source .env/bin/activate
+```shell
+python3 -m venv venv
+. venv/bin/activate
 pip install --requirement requirements.txt
 ```
 
 Run the test
-```sh
+```shell
 make unittest
 ```
 
