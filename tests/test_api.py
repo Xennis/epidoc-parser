@@ -6,20 +6,18 @@ from epidoc import EpiDoc, load, loads
 TESTDATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "testdata")
 
 
-def assertEpiDoc(test, want, actual, msg_prefix=""):
-    test.assertEqual(want.title, actual.title, msg=f"{msg_prefix} title")
-    test.assertEqual(want.idno, actual.idno, msg=f"{msg_prefix} idno")
-    test.assertEqual(want.material, actual.material, msg=f"{msg_prefix} material")
-    test.assertEqual(want.origin_dates, actual.origin_dates, msg=f"{msg_prefix} origin_dates")
-    test.assertEqual(want.origin_place, actual.origin_place, msg=f"{msg_prefix} origin_place")
-    test.assertEqual(want.provenances, actual.provenances, msg=f"{msg_prefix} provenances")
-    test.assertEqual(want.terms, actual.terms, msg=f"{msg_prefix} terms")
-    test.assertEqual(want.languages, actual.languages, msg=f"{msg_prefix} languages")
-    test.assertEqual(want.commentary, actual.commentary, msg=f"{msg_prefix} commentary")
-    test.assertEqual(want.edition_language, actual.edition_language, msg=f"{msg_prefix} edition_language")
-    test.assertEqual(
-        want.edition_foreign_languages, actual.edition_foreign_languages, msg=f"{msg_prefix} edition_foreign_languages"
-    )
+def assert_epi_doc(test, want, actual):
+    test.assertEqual(want.title, actual.title, msg="title")
+    test.assertEqual(want.idno, actual.idno, msg="idno")
+    test.assertEqual(want.material, actual.material, msg="material")
+    test.assertEqual(want.origin_dates, actual.origin_dates, msg="origin_dates")
+    test.assertEqual(want.origin_place, actual.origin_place, msg="origin_place")
+    test.assertEqual(want.provenances, actual.provenances, msg="provenances")
+    test.assertEqual(want.terms, actual.terms, msg="terms")
+    test.assertEqual(want.languages, actual.languages, msg="languages")
+    test.assertEqual(want.commentary, actual.commentary, msg="commentary")
+    test.assertEqual(want.edition_language, actual.edition_language, msg="edition_language")
+    test.assertEqual(want.edition_foreign_languages, actual.edition_foreign_languages, msg="edition_foreign_languages")
 
 
 class TestLoad(unittest.TestCase):
@@ -306,12 +304,13 @@ class TestLoad(unittest.TestCase):
         ]
 
         for (filename, want) in tests:
-            with open(os.path.join(TESTDATA_DIR, "full", filename)) as f:
-                try:
-                    actual = load(f)
-                except Exception as e:
-                    self.fail(f"{filename} has error {e.__class__.__name__}: {e}")
-            assertEpiDoc(self, want, actual, msg_prefix=filename)
+            with self.subTest(filename):
+                with open(os.path.join(TESTDATA_DIR, "full", filename)) as f:
+                    try:
+                        actual = load(f)
+                    except Exception as e:
+                        self.fail(f"{filename} has error {e.__class__.__name__}: {e}")
+                assert_epi_doc(self, want, actual)
 
 
 class TestLoads(unittest.TestCase):
@@ -377,4 +376,4 @@ class TestLoads(unittest.TestCase):
             doc_string = f.read()
         assert isinstance(doc_string, str), "input is a string"
         actual = loads(doc_string)
-        assertEpiDoc(self, want, actual, msg_prefix=filename)
+        assert_epi_doc(self, want, actual)
