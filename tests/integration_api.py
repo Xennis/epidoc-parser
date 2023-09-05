@@ -3,8 +3,6 @@ import glob
 import os
 import unittest
 
-from git import Repo
-
 import epidoc
 
 TESTDATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "testdata", "idp.data")
@@ -15,7 +13,10 @@ class TestIntegration(unittest.TestCase):
         super().setUp()
         if os.path.exists(TESTDATA_DIR):
             return
-        Repo.clone_from("https://github.com/papyri/idp.data.git", TESTDATA_DIR, branch="master", depth=1)
+
+        raise Exception(
+            f"Test data is missing. Clone it: git clone --branch master --depth 1 https://github.com/papyri/idp.data.git {TESTDATA_DIR}"
+        )
 
     @staticmethod
     def load(filename):
