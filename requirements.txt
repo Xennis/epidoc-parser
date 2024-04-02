@@ -1,4 +1,4 @@
 beautifulsoup4==4.10.0
 black==24.3.0  # Code formatter
-lxml==4.9.1
+lxml==5.2.1
 wheel==0.38.1  # Only required for publish it as a package
