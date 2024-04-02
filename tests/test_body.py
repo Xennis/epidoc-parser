@@ -22,7 +22,7 @@ class EditionTest(unittest.TestCase):
                 {"la": 26},
             ),
         ]
-        for (filename, want_language, want_foreign_languages) in tests:
+        for filename, want_language, want_foreign_languages in tests:
             with self.subTest(filename):
                 with open(os.path.join(TESTDATA_DIR, "body", filename)) as f:
                     elem = BeautifulSoup(f.read(), features="lxml")
