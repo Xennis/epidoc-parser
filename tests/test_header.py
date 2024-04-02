@@ -3,6 +3,7 @@ The test data in this file is from the project [idp.data](https://github.com/pap
 This data is made available under a [Creative Commons Attribution 3.0 License](http://creativecommons.org/licenses/by/3.0/), with
 copyright and attribution to the respective projects.
 """
+
 import os
 import unittest
 
@@ -411,7 +412,7 @@ class TestHistory(unittest.TestCase):
                 {},
             ),
         ]
-        for (filename, want_origin_dates, want_origin_place, want_provenances) in tests:
+        for filename, want_origin_dates, want_origin_place, want_provenances in tests:
             with self.subTest(filename):
                 with open(os.path.join(TESTDATA_DIR, "header-history", filename)) as f:
                     elem = BeautifulSoup(f.read(), features="lxml").history
@@ -530,7 +531,7 @@ class TestProfileDesc(unittest.TestCase):
                 {},
             ),
         ]
-        for (filename, want_terms, want_langs) in tests:
+        for filename, want_terms, want_langs in tests:
             with self.subTest(filename):
                 with open(os.path.join(TESTDATA_DIR, "header-profile-desc", filename)) as f:
                     elem = BeautifulSoup(f.read(), features="lxml").profiledesc

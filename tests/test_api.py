@@ -3,6 +3,7 @@ The test data in this file is from the project [idp.data](https://github.com/pap
 This data is made available under a [Creative Commons Attribution 3.0 License](http://creativecommons.org/licenses/by/3.0/), with
 copyright and attribution to the respective projects.
 """
+
 import os
 import unittest
 
@@ -308,7 +309,7 @@ class TestLoad(unittest.TestCase):
             ),
         ]
 
-        for (filename, want) in tests:
+        for filename, want in tests:
             with self.subTest(filename):
                 with open(os.path.join(TESTDATA_DIR, "full", filename)) as f:
                     try:
