@@ -8,16 +8,16 @@ from .normalize import _normalize, _normalized_get_text
 class EpiDoc:
 
     title = None
-    idno = {}
+    idno: dict[str, str] = {}
     material = None
-    origin_dates = []
-    origin_place = {}
-    provenances = {}
-    terms = []
-    languages = {}
+    origin_dates: list[str] = []
+    origin_place: dict[str, str] = {}
+    provenances: dict[str, str] = {}
+    terms: list[str] = []
+    languages: dict[str, str] = {}
     commentary = None
     edition_language = None
-    edition_foreign_languages = {}
+    edition_foreign_languages: dict[str, int] = {}
 
     @classmethod
     def create(

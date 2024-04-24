@@ -1,19 +1,23 @@
+from typing import Any
+
+from bs4 import Tag
+
 from .normalize import _normalize, _normalized_get_text, _normalized_attrs
 
 
 class _History:
     @staticmethod
-    def origin_dates(history):
+    def origin_dates(history: Tag):
         result = []
-        for elem in history.origin.findAll("origdate"):
+        for elem in history.origin.findAll("origdate"):  # type: ignore
             date = _normalized_attrs(elem)
             date["text"] = _normalized_get_text(elem)
             result.append(date)
         return result
 
     @staticmethod
-    def origin_place(history):
-        origin_place = history.origin.origplace
+    def origin_place(history: Tag):
+        origin_place = history.origin.origplace  # type: ignore
         if not origin_place:
             return {}
         result = _normalized_attrs(origin_place)
@@ -21,8 +25,8 @@ class _History:
         return result
 
     @staticmethod
-    def provenances(history):
-        result = {}
+    def provenances(history: Tag) -> dict[str, Any]:
+        result: dict[str, Any] = {}
         for elem in history.findAll("provenance"):
             typ = _normalize(elem.attrs.get("type"))
             if typ is None:
@@ -31,7 +35,7 @@ class _History:
         return result
 
     @staticmethod
-    def _provenance(provenance):
+    def _provenance(provenance: Tag):
         result = []
         # Note: For some it's provenance.p.placename
         for elem in provenance.findAll("placename"):
@@ -45,20 +49,20 @@ class _History:
 
 class _ProfileDesc:
     @staticmethod
-    def keyword_terms(profile_desc):
-        result = []
+    def keyword_terms(profile_desc: Tag) -> list[dict[str, Any]]:
+        result: list[dict[str, Any]] = []
         textclass = profile_desc.textclass
         if textclass is None:
             return result
-        for elem in textclass.keywords.findAll("term"):
+        for elem in textclass.keywords.findAll("term"):  # type: ignore
             term = _normalized_attrs(elem)
             term["text"] = _normalized_get_text(elem)
             result.append(term)
         return result
 
     @staticmethod
-    def lang_usage(profile_desc):
-        result = {}
+    def lang_usage(profile_desc: Tag) -> dict[str, str]:
+        result: dict[str, str] = {}
         lang_usage = profile_desc.langusage
         if lang_usage is None:
             return result
