@@ -1,0 +1,13 @@
+<!-- DDB_EpiDoc_XML/p.oxy/p.oxy.10/p.oxy.10.1271.xml
+            <availability>
+               <p>© Duke Databank of Documentary Papyri. This work is licensed under a <ref type="license" target="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</ref>.</p>
+            </availability>
+-->
+      <body>
+         <head xml:lang="en">
+            <date>AD 159</date>
+            <placeName>Oxyrhynchus</placeName>
+            <ref n="c.ep.lat;;213" type="reprint-in">C.Epist.Lat. 213</ref>
+         </head>
+         <div xml:lang="grc" type="edition" xml:space="preserve"><ab/></div>
+      </body>

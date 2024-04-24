@@ -26,3 +26,24 @@ class _Edition:
                 continue
             result[lang] = result.get(lang, 0) + 1
         return result
+
+
+class _Head:
+
+    @staticmethod
+    def reprint_from(body: Tag) -> list[str]:
+        result: list[str] = []
+        for elem in body.findAll("ref", type="reprint-from"):
+            n = _normalize(elem.attrs.get("n"))
+            if n:
+                result.append(n)
+        return result
+
+    @staticmethod
+    def reprint_in(body: Tag) -> list[str]:
+        result: list[str] = []
+        for elem in body.findAll("ref", type="reprint-in"):
+            n = _normalize(elem.attrs.get("n"))
+            if n:
+                result.append(n)
+        return result
