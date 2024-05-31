@@ -68,6 +68,8 @@ Call the attributes, for example
 | origin_dates              | `//teiHeader/fileDesc/sourceDesc/msDesc/history/origin/origDate`               |
 | origin_place              | `//teiHeader/fileDesc/sourceDesc/msDesc/history/origin/origPlace`              |
 | provenances               | `//teiHeader/fileDesc/sourceDesc/msDesc/history/provenance`                    |
+| reprint_from              | `//body/ref[@type='reprint-from']`                                             |
+| reprint_in                | `//body/ref[@type='reprint-in']`                                               |
 | terms                     | `//teiHeader/profileDesc/textClass//term`                                      |
 | title                     | `//teiHeader/fileDesc/titleStmt/title`                                         |
 

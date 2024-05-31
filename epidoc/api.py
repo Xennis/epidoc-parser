@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 
-from .body import _Edition
+from .body import _Edition, _Head
 from .header import _History, _ProfileDesc
 from .normalize import _normalize, _normalized_get_text
 
@@ -18,6 +18,8 @@ class EpiDoc:
     commentary = None
     edition_language = None
     edition_foreign_languages: dict[str, int] = {}
+    reprint_from: list[str] = []
+    reprint_in: list[str] = []
 
     @classmethod
     def create(
@@ -33,6 +35,8 @@ class EpiDoc:
         commentary=None,
         edition_language=None,
         edition_foreign_languages=None,
+        reprint_from=None,
+        reprint_in=None,
     ):
         h = cls()
         h.title = title
@@ -52,6 +56,10 @@ class EpiDoc:
         h.edition_language = edition_language
         if edition_foreign_languages is not None:
             h.edition_foreign_languages = edition_foreign_languages
+        if reprint_from is not None:
+            h.reprint_from = reprint_from
+        if reprint_in is not None:
+            h.reprint_in = reprint_in
         return h
 
     def __repr__(self):
@@ -102,5 +110,8 @@ def loads(s):
         doc.commentary = _normalized_get_text(commentary)
     doc.edition_language = _Edition.language(body)
     doc.edition_foreign_languages = _Edition.foreign_languages(body)
+
+    doc.reprint_from = _Head.reprint_from(body)
+    doc.reprint_in = _Head.reprint_in(body)
 
     return doc
