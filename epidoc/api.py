@@ -1,3 +1,5 @@
+from typing import Optional
+
 from bs4 import BeautifulSoup
 
 from .body import _Edition, _Head
@@ -9,6 +11,8 @@ class EpiDoc:
 
     title = None
     idno: dict[str, str] = {}
+    authority: Optional[str] = None
+    availability: Optional[str] = None
     material = None
     origin_dates: list[str] = []
     origin_place: dict[str, str] = {}
@@ -26,6 +30,8 @@ class EpiDoc:
         cls,
         title,
         idno,
+        authority=None,
+        availability=None,
         material=None,
         origin_dates=None,
         origin_place=None,
@@ -42,6 +48,10 @@ class EpiDoc:
         h.title = title
         h.idno = idno
         h.material = material
+        if authority is not None:
+            h.authority = authority
+        if availability is not None:
+            h.availability = availability
         if origin_dates is not None:
             h.origin_dates = origin_dates
         if origin_place is not None:
@@ -78,13 +88,26 @@ def loads(s):
     filedesc = teiheader.filedesc
     doc.title = filedesc.titlestmt.title.getText()
     idnos = {}
-    for idno in filedesc.publicationstmt.find_all("idno"):
+    publication_stmt = filedesc.publicationstmt
+    for idno in publication_stmt.find_all("idno"):
         typ = _normalize(idno.attrs.get("type"))
         value = _normalize(idno.getText())
         if not value:
             continue
         idnos[typ] = value
     doc.idno = idnos
+    authority = publication_stmt.find("authority")
+    if authority:
+        doc.authority = _normalized_get_text(authority)
+    availability = publication_stmt.find("availability")
+    if availability:
+        availability_text = _normalized_get_text(availability)
+        license = availability.find("ref", type="license")
+        if license:
+            license_target = license.attrs.get("target")
+            if license_target:
+                availability_text += f" {license_target}"
+        doc.availability = availability_text
 
     msdesc = filedesc.sourcedesc.msdesc
     if msdesc:

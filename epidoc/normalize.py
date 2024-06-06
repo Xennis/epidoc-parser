@@ -14,7 +14,7 @@ def _normalize(v: T) -> T:
 def _normalized_get_text(raw):
     if not raw:
         return None
-    parsed = raw.getText().strip()
+    parsed = raw.getText().strip().replace("\n", "")
     return parsed if parsed else None
 
 
