@@ -15,6 +15,8 @@ TESTDATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "testdat
 def assert_epi_doc(test, want, actual):
     test.assertEqual(want.title, actual.title, msg="title")
     test.assertEqual(want.idno, actual.idno, msg="idno")
+    test.assertEqual(want.authority, actual.authority, msg="authority")
+    test.assertEqual(want.availability, actual.availability, msg="availability")
     test.assertEqual(want.material, actual.material, msg="material")
     test.assertEqual(want.origin_dates, actual.origin_dates, msg="origin_dates")
     test.assertEqual(want.origin_place, actual.origin_place, msg="origin_place")
@@ -24,6 +26,8 @@ def assert_epi_doc(test, want, actual):
     test.assertEqual(want.commentary, actual.commentary, msg="commentary")
     test.assertEqual(want.edition_language, actual.edition_language, msg="edition_language")
     test.assertEqual(want.edition_foreign_languages, actual.edition_foreign_languages, msg="edition_foreign_languages")
+    test.assertEqual(want.reprint_from, actual.reprint_from, msg="reprint_from")
+    test.assertEqual(want.reprint_in, actual.reprint_in, msg="reprint_in")
 
 
 class TestLoad(unittest.TestCase):
@@ -34,6 +38,8 @@ class TestLoad(unittest.TestCase):
                 EpiDoc.create(
                     title="P.Heid.Arab. I p. 6-7",
                     idno={"filename": "pap(23new)", "tm": "106496"},
+                    authority="The Arabic Papyrology Database",
+                    availability="© The Arabic Papyrology Database. This work is licensed under a Creative Commons Attribution 3.0 License. http://creativecommons.org/licenses/by/3.0/",
                 ),
             ),
             (
@@ -41,6 +47,7 @@ class TestLoad(unittest.TestCase):
                 EpiDoc.create(
                     title="Receipt, Roman CE ii (ca. 162) [BPG]",
                     idno={"apisid": "yale.apis.0000540000", "controlno": "(cty)54", "hgv": "20671", "tm": "20671"},
+                    authority="APIS",
                     origin_dates=[{"notafter": "0199", "notbefore": "0100", "text": "Roman CE ii (ca. 162) [BPG]"}],
                     terms=[{"text": "Receipt"}, {"text": "Papyri"}],
                     languages={"en": "English", "grc": "Greek"},
@@ -57,8 +64,11 @@ class TestLoad(unittest.TestCase):
                         "hgv": "114844",
                         "tm": "114844",
                     },
+                    authority="Duke Collaboratory for Classics Computing (DC3)",
+                    availability="© Duke Databank of Documentary Papyri. This work is licensed under a Creative Commons Attribution 3.0 License. http://creativecommons.org/licenses/by/3.0/",
                     languages={"en": "English", "la": "Latin"},
                     edition_language="la",
+                    reprint_in=["p.ital;2;38/41"],
                 ),
             ),
             (
@@ -71,6 +81,8 @@ class TestLoad(unittest.TestCase):
                         "hgv": "697551",
                         "tm": "697551",
                     },
+                    authority="Duke Collaboratory for Classics Computing (DC3)",
+                    availability="© Duke Databank of Documentary Papyri. This work is licensed under a          Creative          Commons Attribution 3.0 License. http://creativecommons.org/licenses/by/3.0/",
                     languages={"en": "English", "grc": "Greek"},
                     edition_language="grc",
                 ),
@@ -86,6 +98,8 @@ class TestLoad(unittest.TestCase):
                         "ldab": "5148",
                         "tm": "26761",
                     },
+                    authority="Digital Corpus of Literary Papyri",
+                    availability="© Digital Corpus of Literary Papyri. This work is licensed under a Creative Commons Attribution 3.0 License. http://creativecommons.org/licenses/by/3.0/",
                     material="papyrus",
                     origin_dates=[
                         {
@@ -132,6 +146,8 @@ class TestLoad(unittest.TestCase):
                         "ldab": "135858",
                         "tm": "135858",
                     },
+                    authority="Digital Corpus of Literary Papyri",
+                    availability="© Digital Corpus of Literary Papyri. This work is licensed under a Creative Commons Attribution 3.0 License. http://creativecommons.org/licenses/by/3.0/",
                     material="parchment",
                     origin_dates=[
                         {

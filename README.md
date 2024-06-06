@@ -63,6 +63,8 @@ Call the attributes, for example
 | edition_foreign_languages | `//body/div[@type='edition']//foreign/@xml:lang`                               |
 | edition_language          | `//body/div[@type='edition']/@xml:lang`                                        |
 | idno                      | `//teiHeader/fileDesc/publicationStmt/idno`                                    |
+| authority                 | `//teiHeader/fileDesc/publicationStmt/authority`                               |
+| availability              | `//teiHeader/fileDesc/publicationStmt/availability`                            |
 | languages                 | `//teiHeader/profileDesc/langUsage/language`                                   |
 | material                  | `//teiHeader/fileDesc/sourceDesc/msDesc/physDesc/objectDesc//support/material` |
 | origin_dates              | `//teiHeader/fileDesc/sourceDesc/msDesc/history/origin/origDate`               |
