@@ -14,7 +14,7 @@ setuptools.setup(
     classifiers=[
         "Programming Language :: Python :: 3",
     ],
-    description="A small example package",
+    description="Parser for EpiDoc (epigraphic documents in TEI XML)",
     install_requires=requires,
     long_description=long_description,
     long_description_content_type="text/markdown",
