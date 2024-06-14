@@ -4,6 +4,8 @@
 
 Python parser for EpiDoc (epigraphic documents in TEI XML).
 
+For example [idp.data-sheet](https://github.com/Xennis/idp.data-sheet) uses the parser to generate a single CSV sheet of the [Papyri.info Integrating Digital Papyrology data](https://github.com/papyri/idp.data).
+
 ## Usage
 
 ### Installation 
