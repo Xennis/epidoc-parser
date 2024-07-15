@@ -2,6 +2,6 @@ beautifulsoup4==4.12.3
 black==24.3.0  # Code formatter
 lxml==5.2.1
 mypy==1.10.0  # Type checker
-setuptools==69.2.0  # Only required for publish it as a package
+setuptools==70.0.0  # Only required for publish it as a package
 types-beautifulsoup4==4.12.0.20240229  # Stubs for beautifulsoup4
 wheel==0.43.0  # Only required for publish it as a package
