@@ -1,7 +1,7 @@
-beautifulsoup4==4.12.3
+beautifulsoup4==4.13.3
 black==25.1.0  # Code formatter
-lxml==5.3.0
-mypy==1.14.1  # Type checker
-setuptools==75.8.0  # Only required for publish it as a package
-types-beautifulsoup4==4.12.0.20241020  # Stubs for beautifulsoup4
+lxml==5.3.1
+mypy==1.15.0  # Type checker
+setuptools==75.8.2  # Only required for publish it as a package
+types-beautifulsoup4==4.12.0.20250204  # Stubs for beautifulsoup4
 wheel==0.45.1  # Only required for publish it as a package
