@@ -5,7 +5,7 @@ with open("README.md", "r") as f:
 
 requires = [
     "beautifulsoup4>=4.12,<5",
-    "lxml>=5.2,<6",
+    "lxml>=5.2,<7",
 ]
 
 setuptools.setup(
