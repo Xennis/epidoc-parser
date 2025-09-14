@@ -7,19 +7,28 @@ from .normalize import _normalize, _normalized_get_text, _normalized_attrs
 
 class _History:
     @staticmethod
-    def origin_dates(history: Tag):
+    def origin_dates(history: Tag) -> list[Any]:
+        origin = history.origin
+        if origin is None:
+            return []
+
         result = []
-        for elem in history.origin.findAll("origdate"):  # type: ignore
+        for elem in origin.findAll("origdate"):  # type: ignore
             date = _normalized_attrs(elem)
             date["text"] = _normalized_get_text(elem)
             result.append(date)
         return result
 
     @staticmethod
-    def origin_place(history: Tag):
-        origin_place = history.origin.origplace  # type: ignore
+    def origin_place(history: Tag) -> dict[str, Any]:
+        origin = history.origin
+        if origin is None:
+            return {}
+
+        origin_place = origin.origplace  # type: ignore
         if not origin_place:
             return {}
+
         result = _normalized_attrs(origin_place)
         result["text"] = origin_place.getText().strip()
         return result
@@ -50,11 +59,16 @@ class _History:
 class _ProfileDesc:
     @staticmethod
     def keyword_terms(profile_desc: Tag) -> list[dict[str, Any]]:
-        result: list[dict[str, Any]] = []
         textclass = profile_desc.textclass
         if textclass is None:
-            return result
-        for elem in textclass.keywords.findAll("term"):  # type: ignore
+            return []
+
+        keywords = textclass.keywords
+        if keywords is None:
+            return []
+
+        result: list[dict[str, Any]] = []
+        for elem in keywords.findAll("term"):  # type: ignore
             term = _normalized_attrs(elem)
             term["text"] = _normalized_get_text(elem)
             result.append(term)
