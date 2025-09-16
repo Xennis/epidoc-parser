@@ -43,11 +43,11 @@ class TestIntegration(unittest.TestCase):
     def test_dclp(self):
         self.load_all(os.path.join(TESTDATA_DIR, "DCLP"))
 
+    def test_ddb(self):
+        self.load_all(os.path.join(TESTDATA_DIR, "DDB_EpiDoc_XML"))
+
     def test_hgv_meta(self):
         self.load_all(os.path.join(TESTDATA_DIR, "HGV_meta_EpiDoc"))
 
     def test_hgv_trans(self):
         self.load_all(os.path.join(TESTDATA_DIR, "HGV_trans_EpiDoc"))
-
-    def test_ddb(self):
-        self.load_all(os.path.join(TESTDATA_DIR, "DDB_EpiDoc_XML"))
