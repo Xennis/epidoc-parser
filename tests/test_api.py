@@ -7,7 +7,7 @@ copyright and attribution to the respective projects.
 import os
 import unittest
 
-from epidoc import EpiDoc, load, loads
+from epidoc_parser import EpiDoc, load, loads
 
 TESTDATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "testdata")
 

@@ -1,6 +1,6 @@
 import unittest
 
-from epidoc.normalize import _normalize
+from epidoc_parser.normalize import _normalize
 
 
 class TestNormalize(unittest.TestCase):

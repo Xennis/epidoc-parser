@@ -3,7 +3,7 @@ import unittest
 
 from bs4 import BeautifulSoup
 
-from epidoc.body import _Edition, _Head
+from epidoc_parser.body import _Edition, _Head
 
 TESTDATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "testdata")
 
