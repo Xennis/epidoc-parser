@@ -9,7 +9,7 @@ import unittest
 
 from bs4 import BeautifulSoup
 
-from epidoc.header import _History, _ProfileDesc
+from epidoc_parser.header import _History, _ProfileDesc
 
 TESTDATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "testdata")
 
