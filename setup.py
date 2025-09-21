@@ -4,18 +4,22 @@ with open("README.md", "r") as f:
     long_description = f.read()
 
 requires = [
-    "beautifulsoup4>=4.12,<5",
-    "lxml>=5.2,<7",
+    "beautifulsoup4>=4.13,<5",
+    "lxml>=6,<7",
 ]
 
 setuptools.setup(
     author="Xennis",
     author_email="code@xennis.org",
     classifiers=[
+        "Intended Audience :: Science/Research",
+        "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3",
+        "Topic :: Text Processing :: Markup :: XML",
     ],
     description="Parser for EpiDoc (epigraphic documents in TEI XML)",
     install_requires=requires,
+    license="MIT",
     long_description=long_description,
     long_description_content_type="text/markdown",
     name="epidoc-parser",
