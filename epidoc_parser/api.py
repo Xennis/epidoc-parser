@@ -1,6 +1,7 @@
+import warnings
 from typing import Optional, Self, TextIO
 
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag, XMLParsedAsHTMLWarning
 
 from .body import _Edition, _Head
 from .header import _History, _ProfileDesc
@@ -81,6 +82,7 @@ def load(fp: TextIO) -> EpiDoc:
 
 
 def loads(s: str) -> EpiDoc:
+    warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
     soup = BeautifulSoup(s, features="lxml")
     doc = EpiDoc()
 
