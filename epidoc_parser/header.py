@@ -13,7 +13,7 @@ class _History:
             return []
 
         result: list[dict[str, str]] = []
-        for elem in origin.find_all("origdate"):  # type: ignore
+        for elem in origin.find_all("origdate"):
             date = _normalized_attrs(elem)
             date["text"] = _normalized_get_text(elem)
             result.append(date)
@@ -25,7 +25,7 @@ class _History:
         if origin is None:
             return {}
 
-        origin_place = origin.origplace  # type: ignore
+        origin_place = origin.origplace
         if not origin_place:
             return {}
 
@@ -68,7 +68,7 @@ class _ProfileDesc:
             return []
 
         result: list[dict[str, Any]] = []
-        for elem in keywords.find_all("term"):  # type: ignore
+        for elem in keywords.find_all("term"):
             term = _normalized_attrs(elem)
             term["text"] = _normalized_get_text(elem)
             result.append(term)
