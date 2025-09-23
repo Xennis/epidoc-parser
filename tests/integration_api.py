@@ -3,7 +3,7 @@ import glob
 import os
 import unittest
 
-import epidoc
+import epidoc_parser
 
 TESTDATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "testdata", "idp.data")
 
@@ -22,7 +22,7 @@ class TestIntegration(unittest.TestCase):
     def load(filename):
         with open(filename) as f:
             try:
-                epidoc.load(f)
+                epidoc_parser.load(f)
             except Exception as e:
                 # Raised exception are ignored by executor.map
                 return Exception(f"{filename} has error {e.__class__.__name__}: {e}")
