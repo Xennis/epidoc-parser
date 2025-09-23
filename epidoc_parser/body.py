@@ -1,3 +1,5 @@
+from typing import Optional, Any
+
 from bs4 import Tag
 
 from .normalize import _normalize
@@ -5,14 +7,16 @@ from .normalize import _normalize
 
 class _Edition:
     @staticmethod
-    def _edition(body: Tag):
+    def _edition(body: Tag) -> Optional[Any]:
         return body.find("div", type="edition")  # Note: limit to xml:space="preserve"?
 
     @staticmethod
-    def language(body: Tag):
+    def language(body: Tag) -> Optional[str]:
         edition = _Edition._edition(body)
         if edition:
             return _normalize(edition.attrs.get("xml:lang"))
+
+        return None
 
     @staticmethod
     def foreign_languages(body: Tag) -> dict[str, int]:
@@ -33,7 +37,7 @@ class _Head:
     @staticmethod
     def reprint_from(body: Tag) -> list[str]:
         result: list[str] = []
-        for elem in body.findAll("ref", type="reprint-from"):
+        for elem in body.find_all("ref", type="reprint-from"):
             n = _normalize(elem.attrs.get("n"))
             if n:
                 result.append(n)
@@ -42,7 +46,7 @@ class _Head:
     @staticmethod
     def reprint_in(body: Tag) -> list[str]:
         result: list[str] = []
-        for elem in body.findAll("ref", type="reprint-in"):
+        for elem in body.find_all("ref", type="reprint-in"):
             n = _normalize(elem.attrs.get("n"))
             if n:
                 result.append(n)
