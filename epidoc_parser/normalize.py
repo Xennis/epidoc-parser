@@ -1,4 +1,4 @@
-from typing import TypeVar, Any
+from typing import TypeVar, Any, Optional
 
 from bs4 import Tag
 
@@ -11,7 +11,7 @@ def _normalize(v: T) -> T:
     return v
 
 
-def _normalized_get_text(raw):
+def _normalized_get_text(raw: Any) -> Optional[str]:
     if not raw:
         return None
     parsed = raw.getText().strip().replace("\n", "")
@@ -23,3 +23,13 @@ def _normalized_attrs(raw: Tag) -> dict[str, Any]:
     for name, value in raw.attrs.items():
         parsed[_normalize(name)] = _normalize(value)
     return parsed
+
+
+def _must_find_sub_tag(tag: Tag, *keys: str) -> Tag:
+    current_tag = tag
+    for key in keys:
+        sub_tag = current_tag.find(key)
+        assert isinstance(sub_tag, Tag), f"${key} is not None"
+        current_tag = sub_tag
+
+    return current_tag

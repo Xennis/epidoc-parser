@@ -7,13 +7,13 @@ from .normalize import _normalize, _normalized_get_text, _normalized_attrs
 
 class _History:
     @staticmethod
-    def origin_dates(history: Tag) -> list[Any]:
+    def origin_dates(history: Tag) -> list[dict[str, str]]:
         origin = history.origin
         if origin is None:
             return []
 
-        result = []
-        for elem in origin.findAll("origdate"):  # type: ignore
+        result: list[dict[str, str]] = []
+        for elem in origin.find_all("origdate"):  # type: ignore
             date = _normalized_attrs(elem)
             date["text"] = _normalized_get_text(elem)
             result.append(date)
@@ -36,7 +36,7 @@ class _History:
     @staticmethod
     def provenances(history: Tag) -> dict[str, Any]:
         result: dict[str, Any] = {}
-        for elem in history.findAll("provenance"):
+        for elem in history.find_all("provenance"):
             typ = _normalize(elem.attrs.get("type"))
             if typ is None:
                 continue
@@ -44,10 +44,10 @@ class _History:
         return result
 
     @staticmethod
-    def _provenance(provenance: Tag):
+    def _provenance(provenance: Tag) -> list[Any]:
         result = []
         # Note: For some it's provenance.p.placename
-        for elem in provenance.findAll("placename"):
+        for elem in provenance.find_all("placename"):
             place = _normalized_attrs(elem)
             place["text"] = _normalized_get_text(elem)
             if "ref" in place:
@@ -68,7 +68,7 @@ class _ProfileDesc:
             return []
 
         result: list[dict[str, Any]] = []
-        for elem in keywords.findAll("term"):  # type: ignore
+        for elem in keywords.find_all("term"):  # type: ignore
             term = _normalized_attrs(elem)
             term["text"] = _normalized_get_text(elem)
             result.append(term)
@@ -80,7 +80,9 @@ class _ProfileDesc:
         lang_usage = profile_desc.langusage
         if lang_usage is None:
             return result
-        for elem in lang_usage.findAll("language"):
+        for elem in lang_usage.find_all("language"):
             ident = _normalize(elem.attrs.get("ident"))
-            result[ident] = _normalized_get_text(elem)
+            text = _normalized_get_text(elem)
+            if text is not None:
+                result[ident] = text
         return result

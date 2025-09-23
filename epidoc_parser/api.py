@@ -1,10 +1,10 @@
-from typing import Optional
+from typing import Optional, Self, TextIO
 
 from bs4 import BeautifulSoup
 
 from .body import _Edition, _Head
 from .header import _History, _ProfileDesc
-from .normalize import _normalize, _normalized_get_text
+from .normalize import _normalize, _normalized_get_text, _must_find_sub_tag
 
 
 class EpiDoc:
@@ -14,10 +14,10 @@ class EpiDoc:
     authority: Optional[str] = None
     availability: Optional[str] = None
     material = None
-    origin_dates: list[str] = []
+    origin_dates: list[dict[str, str]] = []
     origin_place: dict[str, str] = {}
-    provenances: dict[str, str] = {}
-    terms: list[str] = []
+    provenances: dict[str, list[dict[str, str]]] = {}
+    terms: list[dict[str, str]] = []
     languages: dict[str, str] = {}
     commentary = None
     edition_language = None
@@ -28,22 +28,22 @@ class EpiDoc:
     @classmethod
     def create(
         cls,
-        title,
-        idno,
-        authority=None,
-        availability=None,
-        material=None,
-        origin_dates=None,
-        origin_place=None,
-        provenances=None,
-        terms=None,
-        languages=None,
-        commentary=None,
-        edition_language=None,
-        edition_foreign_languages=None,
-        reprint_from=None,
-        reprint_in=None,
-    ):
+        title: str,
+        idno: dict[str, str],
+        authority: Optional[str] = None,
+        availability: Optional[str] = None,
+        material: Optional[str] = None,
+        origin_dates: Optional[list[dict[str, str]]] = None,
+        origin_place: Optional[dict[str, str]] = None,
+        provenances: Optional[dict[str, list[dict[str, str]]]] = None,
+        terms: Optional[list[dict[str, str]]] = None,
+        languages: Optional[dict[str, str]] = None,
+        commentary: Optional[str] = None,
+        edition_language: Optional[str] = None,
+        edition_foreign_languages: Optional[dict[str, int]] = None,
+        reprint_from: Optional[list[str]] = None,
+        reprint_in: Optional[list[str]] = None,
+    ) -> Self:
         h = cls()
         h.title = title
         h.idno = idno
@@ -72,23 +72,24 @@ class EpiDoc:
             h.reprint_in = reprint_in
         return h
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f'<EpiDoc "{self.title}">'
 
 
-def load(fp):
+def load(fp: TextIO) -> EpiDoc:
     return loads(fp.read())
 
 
-def loads(s):
+def loads(s: str) -> EpiDoc:
     soup = BeautifulSoup(s, features="lxml")
     doc = EpiDoc()
 
-    teiheader = soup.teiheader
-    filedesc = teiheader.filedesc
-    doc.title = filedesc.titlestmt.title.getText()
+    teiheader = _must_find_sub_tag(soup, "teiheader")
+    filedesc = _must_find_sub_tag(teiheader, "filedesc")
+    title = _must_find_sub_tag(filedesc, "titlestmt", "title")
+    doc.title = title.getText()
     idnos = {}
-    publication_stmt = filedesc.publicationstmt
+    publication_stmt = _must_find_sub_tag(filedesc, "publicationstmt")
     for idno in publication_stmt.find_all("idno"):
         typ = _normalize(idno.attrs.get("type"))
         value = _normalize(idno.getText())
@@ -99,35 +100,40 @@ def loads(s):
     authority = publication_stmt.find("authority")
     if authority:
         doc.authority = _normalized_get_text(authority)
-    availability = publication_stmt.find("availability")
+    availability = publication_stmt.availability
     if availability:
         availability_text = _normalized_get_text(availability)
         license = availability.find("ref", type="license")
-        if license:
+        if availability_text and isinstance(license, Tag):
             license_target = license.attrs.get("target")
             if license_target:
                 availability_text += f" {license_target}"
         doc.availability = availability_text
 
-    msdesc = filedesc.sourcedesc.msdesc
-    if msdesc:
-        physdesc = msdesc.physdesc
-        if physdesc:
-            support = physdesc.objectdesc.support
-            if hasattr(support, "material"):
-                doc.material = _normalize(_normalized_get_text(support.material))
-        history = msdesc.history
-        if history:
-            doc.origin_dates = _History.origin_dates(history)
-            doc.origin_place = _History.origin_place(history)
-            doc.provenances = _History.provenances(history)
+    sourcedesc = filedesc.sourcedesc
+    if sourcedesc:
+        msdesc = sourcedesc.msdesc
+        if msdesc:
+            physdesc = msdesc.physdesc
+            if physdesc:
+                objectdesc = physdesc.objectdesc
+                if objectdesc:
+                    support = objectdesc.support
+                    if support and hasattr(support, "material"):
+                        doc.material = _normalize(_normalized_get_text(support.material))
+
+            history = msdesc.history
+            if history:
+                doc.origin_dates = _History.origin_dates(history)
+                doc.origin_place = _History.origin_place(history)
+                doc.provenances = _History.provenances(history)
 
     profile_desc = teiheader.profiledesc
     if profile_desc:
         doc.languages = _ProfileDesc.lang_usage(profile_desc)
         doc.terms = _ProfileDesc.keyword_terms(profile_desc)
 
-    body = soup.body
+    body = _must_find_sub_tag(soup, "body")
     commentary = body.find("div", type="commentary", subtype="general")
     if commentary:
         doc.commentary = _normalized_get_text(commentary)
