@@ -343,14 +343,7 @@ class TestHistory(unittest.TestCase):
             ),
             (
                 "14.xml",
-                [
-                    {
-                        "notafter": "0750",
-                        "notbefore": "0701",
-                        "precision": "low",
-                        "text": None,
-                    }
-                ],
+                [{"notafter": "0750", "notbefore": "0701", "precision": "low"}],
                 {
                     "text": "Theben",
                 },
@@ -464,7 +457,7 @@ class TestProfileDesc(unittest.TestCase):
             ),
             (
                 "4.xml",
-                [{"text": None}],
+                [],
                 {
                     "de": "Deutsch",
                     "el": "Griechisch",

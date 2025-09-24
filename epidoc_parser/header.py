@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Union
 
 from bs4 import Tag
 
@@ -15,12 +15,14 @@ class _History:
         result: list[dict[str, str]] = []
         for elem in origin.find_all("origdate"):
             date = _normalized_attrs(elem)
-            date["text"] = _normalized_get_text(elem)
+            text = _normalized_get_text(elem)
+            if text is not None:
+                date["text"] = text
             result.append(date)
         return result
 
     @staticmethod
-    def origin_place(history: Tag) -> dict[str, Any]:
+    def origin_place(history: Tag) -> dict[str, str]:
         origin = history.origin
         if origin is None:
             return {}
@@ -34,8 +36,8 @@ class _History:
         return result
 
     @staticmethod
-    def provenances(history: Tag) -> dict[str, Any]:
-        result: dict[str, Any] = {}
+    def provenances(history: Tag) -> dict[str, list[dict[str, Union[str, list]]]]:
+        result: dict[str, list[dict[str, Union[str, list]]]] = {}
         for elem in history.find_all("provenance"):
             typ = _normalize(elem.attrs.get("type"))
             if typ is None:
@@ -44,21 +46,30 @@ class _History:
         return result
 
     @staticmethod
-    def _provenance(provenance: Tag) -> list[Any]:
+    def _provenance(provenance: Tag) -> list[dict[str, Union[str, list[str]]]]:
         result = []
         # Note: For some it's provenance.p.placename
         for elem in provenance.find_all("placename"):
             place = _normalized_attrs(elem)
-            place["text"] = _normalized_get_text(elem)
-            if "ref" in place:
-                place["ref"] = [_normalize(ref) for ref in place["ref"].split(" ")]
-            result.append(place)
+            elem_res: dict[str, Union[str, list[str]]] = {}
+            text = _normalized_get_text(elem)
+            if text is not None:
+                elem_res["text"] = text
+
+            for key, value in place.items():
+                if key == "ref":
+                    elem_res["ref"] = [_normalize(value) for value in value.split(" ")]
+                    continue
+
+                elem_res[key] = value
+
+            result.append(elem_res)
         return result
 
 
 class _ProfileDesc:
     @staticmethod
-    def keyword_terms(profile_desc: Tag) -> list[dict[str, Any]]:
+    def keyword_terms(profile_desc: Tag) -> list[dict[str, str]]:
         textclass = profile_desc.textclass
         if textclass is None:
             return []
@@ -67,11 +78,15 @@ class _ProfileDesc:
         if keywords is None:
             return []
 
-        result: list[dict[str, Any]] = []
+        result: list[dict[str, str]] = []
         for elem in keywords.find_all("term"):
             term = _normalized_attrs(elem)
-            term["text"] = _normalized_get_text(elem)
-            result.append(term)
+            text = _normalized_get_text(elem)
+            if text is not None:
+                term["text"] = text
+
+            if term:
+                result.append(term)
         return result
 
     @staticmethod
