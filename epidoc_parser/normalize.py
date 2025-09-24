@@ -11,14 +11,14 @@ def _normalize(v: T) -> T:
     return v
 
 
-def _normalized_get_text(raw: Any) -> Optional[str]:
+def _normalized_get_text(raw: Optional[Tag]) -> Optional[str]:
     if not raw:
         return None
     parsed = raw.getText().strip().replace("\n", "")
     return parsed if parsed else None
 
 
-def _normalized_attrs(raw: Tag) -> dict[str, Any]:
+def _normalized_attrs(raw: Tag) -> dict[str, str]:
     parsed = {}
     for name, value in raw.attrs.items():
         parsed[_normalize(name)] = _normalize(value)

@@ -1,5 +1,5 @@
 import warnings
-from typing import Optional, Self, TextIO
+from typing import Optional, Self, TextIO, Union
 
 from bs4 import BeautifulSoup, Tag, XMLParsedAsHTMLWarning
 
@@ -17,7 +17,7 @@ class EpiDoc:
     material = None
     origin_dates: list[dict[str, str]] = []
     origin_place: dict[str, str] = {}
-    provenances: dict[str, list[dict[str, str]]] = {}
+    provenances: dict[str, list[dict[str, Union[str, list]]]] = {}
     terms: list[dict[str, str]] = []
     languages: dict[str, str] = {}
     commentary = None
@@ -36,7 +36,7 @@ class EpiDoc:
         material: Optional[str] = None,
         origin_dates: Optional[list[dict[str, str]]] = None,
         origin_place: Optional[dict[str, str]] = None,
-        provenances: Optional[dict[str, list[dict[str, str]]]] = None,
+        provenances: Optional[dict[str, list[dict[str, Union[str, list]]]]] = None,
         terms: Optional[list[dict[str, str]]] = None,
         languages: Optional[dict[str, str]] = None,
         commentary: Optional[str] = None,
@@ -100,7 +100,7 @@ def loads(s: str) -> EpiDoc:
         idnos[typ] = value
     doc.idno = idnos
     authority = publication_stmt.find("authority")
-    if authority:
+    if isinstance(authority, Tag):
         doc.authority = _normalized_get_text(authority)
     availability = publication_stmt.availability
     if availability:
@@ -137,7 +137,7 @@ def loads(s: str) -> EpiDoc:
 
     body = _must_find_sub_tag(soup, "body")
     commentary = body.find("div", type="commentary", subtype="general")
-    if commentary:
+    if isinstance(commentary, Tag):
         doc.commentary = _normalized_get_text(commentary)
     doc.edition_language = _Edition.language(body)
     doc.edition_foreign_languages = _Edition.foreign_languages(body)

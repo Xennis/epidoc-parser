@@ -1,28 +1,33 @@
-from typing import Optional, Any
+from typing import Optional
 
-from bs4 import Tag
+from bs4 import Tag, NavigableString
 
 from .normalize import _normalize
 
 
 class _Edition:
     @staticmethod
-    def _edition(body: Tag) -> Optional[Any]:
-        return body.find("div", type="edition")  # Note: limit to xml:space="preserve"?
-
-    @staticmethod
-    def language(body: Tag) -> Optional[str]:
-        edition = _Edition._edition(body)
-        if edition:
-            return _normalize(edition.attrs.get("xml:lang"))
+    def _edition(body: Tag) -> Optional[Tag]:
+        edition = body.find("div", type="edition")  # Note: limit to xml:space="preserve"?
+        if isinstance(edition, Tag):
+            return edition
 
         return None
 
     @staticmethod
+    def language(body: Tag) -> Optional[str]:
+        edition = _Edition._edition(body)
+        if edition is None:
+            return None
+
+        return _normalize(edition.attrs.get("xml:lang"))
+
+    @staticmethod
     def foreign_languages(body: Tag) -> dict[str, int]:
         edition = _Edition._edition(body)
-        if not edition:
+        if edition is None:
             return {}
+
         result: dict[str, int] = {}
         for elem in edition.find_all("foreign"):
             lang = _normalize(elem.attrs.get("xml:lang"))
