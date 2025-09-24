@@ -4,7 +4,7 @@
 
 Python parser for EpiDoc (epigraphic documents in TEI XML).
 
-For example [idp.data-sheet](https://github.com/Xennis/idp.data-sheet) uses the parser to generate a single CSV sheet of the [Papyri.info Integrating Digital Papyrology data](https://github.com/papyri/idp.data).
+For example [idp.data-sheet](https://github.com/Xennis/idp.data-search) uses the parser to generate a single CSV sheet of the [Papyri.info Integrating Digital Papyrology data](https://github.com/papyri/idp.data).
 
 ## Usage
 
@@ -19,15 +19,15 @@ pip install git+https://github.com/Xennis/epidoc-parser
 
 Load a document from a file
 ```python
-import epidoc
+import epidoc_parser
 
 with open("my-epidoc.xml") as f:
-    doc = epidoc.load(f)
+    doc = epidoc_parser.load(f)
 ```
 
 Load a document from a string
 ```python
-import epidoc
+import epidoc_parser
 
 my_epidoc = """<?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="http://www.stoa.org/epidoc/schema/8.13/tei-epidoc.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
@@ -36,7 +36,7 @@ my_epidoc = """<?xml version="1.0" encoding="UTF-8"?>
 </TEI>
 """
 
-doc = epidoc.loads(my_epidoc)
+doc = epidoc_parser.loads(my_epidoc)
 ```
 
 ### Get data from a document
