@@ -59,23 +59,23 @@ Call the attributes, for example
 
 ## Documentation
 
-| Field                     | EpiDoc source element (XPath)                                                  |
-|---------------------------|--------------------------------------------------------------------------------|
-| commentary                | `//body/div[@type='commentary' and @subtype='general']`                        |
-| edition_foreign_languages | `//body/div[@type='edition']//foreign/@xml:lang`                               |
-| edition_language          | `//body/div[@type='edition']/@xml:lang`                                        |
-| idno                      | `//teiHeader/fileDesc/publicationStmt/idno`                                    |
-| authority                 | `//teiHeader/fileDesc/publicationStmt/authority`                               |
-| availability              | `//teiHeader/fileDesc/publicationStmt/availability`                            |
-| languages                 | `//teiHeader/profileDesc/langUsage/language`                                   |
-| material                  | `//teiHeader/fileDesc/sourceDesc/msDesc/physDesc/objectDesc//support/material` |
-| origin_dates              | `//teiHeader/fileDesc/sourceDesc/msDesc/history/origin/origDate`               |
-| origin_place              | `//teiHeader/fileDesc/sourceDesc/msDesc/history/origin/origPlace`              |
-| provenances               | `//teiHeader/fileDesc/sourceDesc/msDesc/history/provenance`                    |
-| reprint_from              | `//body/ref[@type='reprint-from']`                                             |
-| reprint_in                | `//body/ref[@type='reprint-in']`                                               |
-| terms                     | `//teiHeader/profileDesc/textClass//term`                                      |
-| title                     | `//teiHeader/fileDesc/titleStmt/title`                                         |
+| Field                     | EpiDoc source element (XPath)                                                                          |
+|---------------------------|--------------------------------------------------------------------------------------------------------|
+| commentary                | `//body/div[@type='commentary' and @subtype='general']`                                                |
+| edition_foreign_languages | `//body/div[@type='edition']//foreign/@xml:lang`                                                       |
+| edition_language          | `//body/div[@type='edition']/@xml:lang`                                                                |
+| idno                      | `//teiHeader/fileDesc/publicationStmt/idno` `//teiHeader/fileDesc/sourceDesc/msDesc/msIdentifier/idno` |
+| authority                 | `//teiHeader/fileDesc/publicationStmt/authority`                                                       |
+| availability              | `//teiHeader/fileDesc/publicationStmt/availability`                                                    |
+| languages                 | `//teiHeader/profileDesc/langUsage/language`                                                           |
+| material                  | `//teiHeader/fileDesc/sourceDesc/msDesc/physDesc/objectDesc//support/material`                         |
+| origin_dates              | `//teiHeader/fileDesc/sourceDesc/msDesc/history/origin/origDate`                                       |
+| origin_place              | `//teiHeader/fileDesc/sourceDesc/msDesc/history/origin/origPlace`                                      |
+| provenances               | `//teiHeader/fileDesc/sourceDesc/msDesc/history/provenance`                                            |
+| reprint_from              | `//body/ref[@type='reprint-from']`                                                                     |
+| reprint_in                | `//body/ref[@type='reprint-in']`                                                                       |
+| terms                     | `//teiHeader/profileDesc/textClass//term`                                                              |
+| title                     | `//teiHeader/fileDesc/titleStmt/title`                                                                 |
 
 ## Development
 
