@@ -120,8 +120,8 @@ def loads(s: str) -> EpiDoc:
             if msidentifier:
                 idno = msidentifier.idno
                 if idno and hasattr(idno, "type"):
-                    if idno.get('type')=='invNo':
-                        doc.idno['invno'] = idno.text
+                    if idno.get("type") == "invNo":
+                        doc.idno["invno"] = idno.text
             physdesc = msdesc.physdesc
             if physdesc:
                 objectdesc = physdesc.objectdesc
