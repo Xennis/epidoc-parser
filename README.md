@@ -1,3 +1,5 @@
+
+
 # EpiDoc Parser
 
 [![Python](https://github.com/Xennis/epidoc-parser/actions/workflows/python.yml/badge.svg?branch=main&event=push)](https://github.com/Xennis/epidoc-parser/actions/workflows/python.yml?query=event%3Apush+branch%3Amain)
@@ -10,7 +12,7 @@ For example [idp.data-sheet](https://github.com/Xennis/idp.data-search) uses the
 
 ### Installation 
 
-Install the package
+Install the package (requires Python 3.11 or later)
 ```shell
 pip install git+https://github.com/Xennis/epidoc-parser
 ```
