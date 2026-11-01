@@ -27,7 +27,7 @@ setuptools.setup(
     name="epidoc-parser",
     packages=["epidoc_parser"],
     package_data={"epidoc_parser": ["py.typed"]},
-    python_requires=">=3.9",
+    python_requires=">=3.12",
     url="https://github.com/Xennis/epidoc-parser",
     version="0.0.1",
 )
