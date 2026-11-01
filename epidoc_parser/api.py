@@ -10,18 +10,18 @@ from .normalize import _normalize, _normalized_get_text, _must_find_sub_tag
 
 class EpiDoc:
 
-    title = None
+    title: Optional[str] = None
     idno: dict[str, str] = {}
     authority: Optional[str] = None
     availability: Optional[str] = None
-    material = None
+    material: Optional[str] = None
     origin_dates: list[dict[str, str]] = []
     origin_place: dict[str, str] = {}
     provenances: dict[str, list[dict[str, Union[str, list]]]] = {}
     terms: list[dict[str, str]] = []
     languages: dict[str, str] = {}
-    commentary = None
-    edition_language = None
+    commentary: Optional[str] = None
+    edition_language: Optional[str] = None
     edition_foreign_languages: dict[str, int] = {}
     reprint_from: list[str] = []
     reprint_in: list[str] = []
